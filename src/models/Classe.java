@@ -51,4 +51,7 @@ public abstract class Classe {
     }
 
     public abstract void habilidadeEspecial(Personagem alvo);
+
+    protected void ganharExperiencia(int experienciaGanha) {
+    }
 }

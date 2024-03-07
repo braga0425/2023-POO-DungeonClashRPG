@@ -1,37 +1,37 @@
 package models;
 
 public class PesosDeAtributos {
-    private int pesoForca;
-    private int pesoAgilidade;
-    private int pesoInteligencia;
+    private double pesoForca;
+    private double pesoAgilidade;
+    private double pesoInteligencia;
 
-    public PesosDeAtributos(int pesoForca, int pesoAgilidade, int pesoInteligencia) {
+    public PesosDeAtributos(double pesoForca, double pesoAgilidade, double pesoInteligencia) {
         this.pesoForca = pesoForca;
         this.pesoAgilidade = pesoAgilidade;
         this.pesoInteligencia = pesoInteligencia;
     }
 
-    public int getPesoForca() {
+    public double getPesoForca() {
         return pesoForca;
     }
 
-    public void setPesoForca(int pesoForca) {
+    public void setPesoForca(double pesoForca) {
         this.pesoForca = pesoForca;
     }
 
-    public int getPesoAgilidade() {
+    public double getPesoAgilidade() {
         return pesoAgilidade;
     }
 
-    public void setPesoAgilidade(int pesoAgilidade) {
+    public void setPesoAgilidade(double pesoAgilidade) {
         this.pesoAgilidade = pesoAgilidade;
     }
 
-    public int getPesoInteligencia() {
+    public double getPesoInteligencia() {
         return pesoInteligencia;
     }
 
-    public void setPesoInteligencia(int pesoInteligencia) {
+    public void setPesoInteligencia(double pesoInteligencia) {
         this.pesoInteligencia = pesoInteligencia;
     }
 }
