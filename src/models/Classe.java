@@ -16,9 +16,6 @@ public abstract class Classe {
         // testando commit
     }
 
-    public void adicionarHabilidade(Habilidade habilidade) {
-        habilidades.add(habilidade);
-    }
 
     // Getters e setters
 

@@ -1,6 +1,6 @@
 package models;
 
-public abstract class Arqueiro extends Classe{
+public class Arqueiro extends Classe{
     public Arqueiro(int forca, int agilidade, int inteligencia) {
         super(forca, agilidade, inteligencia);
         adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0, 0.1, 0.3), new PesosDeAtributos(0, 0, 0), 3, false, false));
