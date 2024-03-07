@@ -15,6 +15,10 @@ public abstract class Classe {
         this.habilidades = new ArrayList<>();
     }
 
+    public void adicionarHabilidade(Habilidade habilidade) {
+        habilidades.add(habilidade);
+    }
+
     // Getters e setters
 
     public int getForca() {
