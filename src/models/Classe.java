@@ -7,17 +7,12 @@ public abstract class Classe {
     private int inteligencia;
     private ArrayList<Habilidade> habilidades;
 
-    // Construtor
     public Classe(int forca, int agilidade, int inteligencia) {
         this.forca = forca;
         this.agilidade = agilidade;
         this.inteligencia = inteligencia;
         this.habilidades = new ArrayList<>();
-        // testando commit
     }
-
-
-    // Getters e setters
 
     public int getForca() {
         return forca;
@@ -51,11 +46,9 @@ public abstract class Classe {
         this.habilidades = habilidades;
     }
 
-    // Método para adicionar uma habilidade à lista de habilidades
     public void adicionarHabilidade(Habilidade habilidade) {
         habilidades.add(habilidade);
     }
 
-    // Método abstrato para ser implementado pelas subclasses
     public abstract void habilidadeEspecial(Personagem alvo);
 }

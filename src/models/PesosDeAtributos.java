@@ -5,14 +5,11 @@ public class PesosDeAtributos {
     private int pesoAgilidade;
     private int pesoInteligencia;
 
-    // Construtor
     public PesosDeAtributos(int pesoForca, int pesoAgilidade, int pesoInteligencia) {
         this.pesoForca = pesoForca;
         this.pesoAgilidade = pesoAgilidade;
         this.pesoInteligencia = pesoInteligencia;
     }
-
-    // Getters e setters
 
     public int getPesoForca() {
         return pesoForca;
@@ -38,4 +35,3 @@ public class PesosDeAtributos {
         this.pesoInteligencia = pesoInteligencia;
     }
 }
-

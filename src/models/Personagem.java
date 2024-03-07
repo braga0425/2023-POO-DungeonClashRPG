@@ -13,7 +13,6 @@ public class Personagem {
     private Classe classe;
     private int ID;
 
-    // Construtor
     public Personagem(String nome, int nivel, int PE, float PV, float PM, Classe classe) {
         this.nome = nome;
         this.nivel = nivel;
@@ -24,8 +23,6 @@ public class Personagem {
         this.classe = classe;
         this.ID = ++contadorID;
     }
-
-    // Getters e setters
 
     public String getNome() {
         return nome;
@@ -87,56 +84,52 @@ public class Personagem {
         return ID;
     }
 
-    // Método para ganhar pontos de experiência e subir de nível
     public void ganharExperiencia(int experienciaGanha) {
         this.PE += experienciaGanha;
-        // Lógica para verificar se o personagem pode subir de nível
-        // e atualizar o nível, atributos, etc.
+        verificarSubidaNivel();
     }
 
-    // Método para atacar um inimigo
     public void atacarInimigo(Personagem inimigo) {
-        // Lógica para calcular o dano e aplicá-lo ao inimigo
+        float dano = calcularDano();
+        inimigo.registrarDano(dano);
     }
 
-    // Método para atacar uma equipe
     public void atacarEquipe(ArrayList<Personagem> equipe) {
-        // Lógica para calcular o dano e aplicá-lo a todos os personagens na equipe
+        for (Personagem aliado : equipe) {
+            float dano = calcularDano();
+            aliado.registrarDano(dano);
+        }
     }
 
-    // Método para registrar o dano sofrido
     public void registrarDano(float dano) {
         this.PV -= dano;
         if (this.PV <= 0) {
             this.PV = 0;
-            // Lógica para lidar com o personagem atordoado (PV = 0)
         }
     }
 
-    // Método para calcular o PV máximo do personagem
+    private float calcularDano() {
+        return this.classe.getForca() * 0.5f;
+    }
+
     public float calcularPVMax() {
         return nivel * classe.getForca() + (nivel * classe.getAgilidade() / 2);
     }
 
-    // Método para calcular o PM máximo do personagem
     public float calcularPMMax() {
         return nivel * classe.getInteligencia() + (nivel * classe.getAgilidade() / 3);
     }
 
-    // Método para verificar se o personagem pode subir de nível e atualizar seus atributos
-    public void verificarSubidaNivel() {
+    private void verificarSubidaNivel() {
         int experienciaNecessaria = nivel * 25;
         if (PE >= experienciaNecessaria) {
             subirNivel();
         }
     }
 
-    // Método para subir de nível
     private void subirNivel() {
         nivel++;
-        PE = 0; // Zera os pontos de experiência
-        // Atualiza os atributos conforme necessário para o novo nível
-        // Por exemplo, pode aumentar os pontos de vida, pontos de magia, etc.
+        PE = 0;
         PV = calcularPVMax();
         PM = calcularPMMax();
     }

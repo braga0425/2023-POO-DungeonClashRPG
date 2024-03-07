@@ -11,7 +11,6 @@ public class Habilidade {
     private boolean afetaAmigos;
     private int ID;
 
-    // Construtor
     public Habilidade(String nome, PesosDeAtributos pesosDano, PesosDeAtributos pesosMana, int tempo, boolean afetaTodos, boolean afetaAmigos) {
         this.nome = nome;
         this.pesosDano = pesosDano;
@@ -21,8 +20,6 @@ public class Habilidade {
         this.afetaAmigos = afetaAmigos;
         this.ID = ++contadorID;
     }
-
-    // Getters e setters
 
     public String getNome() {
         return nome;
