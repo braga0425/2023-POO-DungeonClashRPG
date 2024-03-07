@@ -13,6 +13,7 @@ public abstract class Classe {
         this.agilidade = agilidade;
         this.inteligencia = inteligencia;
         this.habilidades = new ArrayList<>();
+        // testando commit
     }
 
     // Getters e setters
