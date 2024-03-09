@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Jogo {
     private Equipe equipeHerois;
     private Equipe equipeInimigos;
+    String nomeClasse;
 
     public Jogo() {
         equipeHerois = new Equipe();
@@ -97,13 +98,20 @@ public class Jogo {
     }
 
     private void carregarEquipesInimigos() {
-        try (BufferedReader br = new BufferedReader(new FileReader("utils/jogo.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/utils/jogo.txt"))) {
             String linha;
+            String faseDescricao = null;
             while ((linha = br.readLine()) != null) {
-                String[] partes = linha.split(" ");
+                if (linha.startsWith("fase")) {
+                    System.out.println("\n" + linha);
+                    faseDescricao = br.readLine();
+                    System.out.println(faseDescricao);
+                    continue;
+                }
 
-                if (partes.length == 1) {
-                    System.out.println("\nFase: " + linha);
+                String[] partes = linha.split(" ");
+                if (partes.length < 3) {
+                    System.out.println("Linha inválida: " + linha);
                     continue;
                 }
 
@@ -138,6 +146,7 @@ public class Jogo {
         }
     }
 
+
     private void exibirInformacoesEquipes() {
         System.out.println("Equipe dos Heróis:");
         exibirInformacoesEquipe(equipeHerois);
@@ -147,21 +156,22 @@ public class Jogo {
 
     private void exibirInformacoesEquipe(Equipe equipe) {
         ArrayList<Personagem> membros = equipe.getMembros();
+
         for (Personagem personagem : membros) {
             System.out.println("ID: " + personagem.getID() + " | Nome: " + personagem.getNome() + " | Classe: " +
-                    personagem.getClasse().getClass().getSimpleName() + " | PV: " + personagem.getPV() +
+                    personagem.getClass().getSimpleName() + " | PV: " + personagem.getPV() +
                     " | PM: " + personagem.getPM() + " | Nível: " + personagem.getNivel() +
                     " | Tempo de Espera: " + personagem.getTempoEspera());
         }
     }
 
     private void batalhar() {
-        while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
+       /* while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
             Personagem primeiroAtacante = sortearPrimeiroAtacante();
             System.out.println(primeiroAtacante.getNome() + " é o próximo a atacar!\n");
             atacar(primeiroAtacante);
             proximoTurno();
-        }
+        }*/
         if (equipeHerois.getMembros().isEmpty()) {
             System.out.println("Os heróis foram derrotados!");
         } else {
