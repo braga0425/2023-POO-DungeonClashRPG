@@ -89,7 +89,7 @@ public class Personagem {
     }
 
     private int calcularDano() {
-        return this.classe.getForca() / 2; // Ajuste para int
+        return this.classe.getForca() / 2;
     }
 
     public int calcularPVMax() {
@@ -117,7 +117,5 @@ public class Personagem {
     public void setTempoEspera(int tempoEspera) {
         this.tempoEspera = tempoEspera;
     }
-
-    //TODO: Aprimorar o método calcularDano
-    //TODO: Implementar o método atacarEquipe
+    
 }

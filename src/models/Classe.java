@@ -56,8 +56,11 @@ public abstract class Classe {
     protected void ganharExperiencia(int experienciaGanha) {
     }
 
-    public abstract int atacar();
+    public int atacar(Personagem alvo) {
+        return 0;
+    }
 
-    //TODO: Ajustar ganharExperiencia, está protegido e não faz nada
-
+    public int getPM() {
+        return 0;
+    }
 }

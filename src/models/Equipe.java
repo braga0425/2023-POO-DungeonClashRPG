@@ -42,9 +42,18 @@ public class Equipe {
     }
 
     public Personagem proximoAtacante() {
-        Random rand = new Random();
-        int index = rand.nextInt(membros.size());
-        return membros.get(index);
+        Personagem proximo = null;
+        int menorTempoEspera = Integer.MAX_VALUE;
+        for (Personagem personagem : membros) {
+            int tempoEspera = personagem.getTempoEspera();
+            if (tempoEspera == 0 && personagem.getPV() > 0) {
+                return personagem;
+            } else if (tempoEspera < menorTempoEspera) {
+                menorTempoEspera = tempoEspera;
+                proximo = personagem;
+            }
+        }
+        return proximo;
     }
 
     public void atualizarTempoEspera() {
@@ -55,7 +64,5 @@ public class Equipe {
             }
         }
     }
-
-    //TODO: o proximoAtacante poderia ser melhorado para escolher o atacante com menor tempo de espera ou maior dano
 
 }

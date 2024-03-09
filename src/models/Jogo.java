@@ -32,10 +32,6 @@ public class Jogo {
 
             }
 
-            @Override
-            public int atacar() {
-                return 0;
-            }
         };
     }
 
@@ -46,10 +42,6 @@ public class Jogo {
 
             }
 
-            @Override
-            public int atacar() {
-                return 0;
-            }
         };
     }
 
@@ -60,10 +52,6 @@ public class Jogo {
 
             }
 
-            @Override
-            public int atacar() {
-                return 0;
-            }
         };
     }
 
@@ -74,10 +62,6 @@ public class Jogo {
 
             }
 
-            @Override
-            public int atacar() {
-                return 0;
-            }
         };
     }
 
@@ -204,7 +188,7 @@ public class Jogo {
         int indexAlvo = rand.nextInt(membrosAlvo.size());
         Personagem alvo = membrosAlvo.get(indexAlvo);
 
-        int dano = atacante.getClasse().atacar();
+        int dano = atacante.getClasse().atacar(alvo);
 
         alvo.setPV(alvo.getPV() - dano);
 
