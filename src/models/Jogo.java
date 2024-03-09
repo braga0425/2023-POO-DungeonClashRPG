@@ -70,7 +70,7 @@ public class Jogo {
         for (int i = 0; i < 3; i++) {
             System.out.println("Digite o nome do herói " + (i + 1) + ": ");
             String nome = scanner.nextLine();
-            System.out.println("Escolha a classe do herói " + (i + 1) + " (Guerreiro, Arqueiro ou Mago): ");
+            System.out.println("Escolha a classe do herói " + (i + 1) + " (Guerreiro, Arqueiro, Mago ou Monstro): ");
             String classe = scanner.nextLine();
             Classe classePersonagem;
             switch (classe.toLowerCase()) {
@@ -83,6 +83,9 @@ public class Jogo {
                 case "mago":
                     classePersonagem = criarMago();
                     break;
+                case "monstro":
+                    classePersonagem = criarMonstro();
+                    break;
                 default:
                     System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.");
                     classePersonagem = criarGuerreiro();
@@ -94,7 +97,7 @@ public class Jogo {
     }
 
     private void carregarEquipesInimigos() {
-        try (BufferedReader br = new BufferedReader(new FileReader("jogo.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("utils/jogo.txt"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] partes = linha.split(" ");
