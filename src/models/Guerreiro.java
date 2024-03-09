@@ -15,5 +15,4 @@ public abstract class Guerreiro extends Classe {
         this.setInteligencia(this.getInteligencia() + 1);
         this.setForca(this.getForca() + 4);
     }
-
 }

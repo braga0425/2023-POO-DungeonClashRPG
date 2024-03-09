@@ -58,4 +58,6 @@ public abstract class Classe {
 
     public abstract int atacar();
 
+    //TODO: Ajustar ganharExperiencia, está protegido e não faz nada
+
 }

@@ -113,4 +113,11 @@ public class Personagem {
         PV = calcularPVMax();
         PM = calcularPMMax();
     }
+
+    public void setTempoEspera(int tempoEspera) {
+        this.tempoEspera = tempoEspera;
+    }
+
+    //TODO: Aprimorar o método calcularDano
+    //TODO: Implementar o método atacarEquipe
 }

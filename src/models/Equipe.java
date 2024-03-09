@@ -12,6 +12,7 @@ public class Equipe {
 
     public void adicionarPersonagem(Personagem personagem) {
         membros.add(personagem);
+        personagem.setTempoEspera(0);
     }
 
     public void removerPersonagem(Personagem personagem) {
@@ -54,4 +55,7 @@ public class Equipe {
             }
         }
     }
+
+    //TODO: o proximoAtacante poderia ser melhorado para escolher o atacante com menor tempo de espera ou maior dano
+
 }
