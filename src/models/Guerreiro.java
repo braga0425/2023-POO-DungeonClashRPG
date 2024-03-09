@@ -11,9 +11,9 @@ public abstract class Guerreiro extends Classe {
     @Override
     public void ganharExperiencia(int experienciaGanha) {
         super.ganharExperiencia(experienciaGanha);
-        this.setAgilidade(this.getAgilidade()+1);
-        this.setInteligencia(this.getInteligencia()+1);
-        this.setForca(this.getForca()+4);
+        this.setAgilidade(this.getAgilidade() + 1);
+        this.setInteligencia(this.getInteligencia() + 1);
+        this.setForca(this.getForca() + 4);
     }
 
 }

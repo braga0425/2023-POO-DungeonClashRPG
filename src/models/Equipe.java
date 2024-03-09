@@ -14,6 +14,10 @@ public class Equipe {
         membros.add(personagem);
     }
 
+    public void removerPersonagem(Personagem personagem) {
+        membros.remove(personagem);
+    }
+
     public Personagem buscarPersonagemPorID(int ID) {
         if (ID <= 0) {
             return null;

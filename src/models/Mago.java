@@ -11,9 +11,9 @@ public abstract class Mago extends Classe {
     @Override
     public void ganharExperiencia(int experienciaGanha) {
         super.ganharExperiencia(experienciaGanha);
-        this.setAgilidade(this.getAgilidade()+2);
-        this.setInteligencia(this.getInteligencia()+3);
-        this.setForca(this.getForca()+1);
+        this.setAgilidade(this.getAgilidade() + 2);
+        this.setInteligencia(this.getInteligencia() + 3);
+        this.setForca(this.getForca() + 1);
     }
 
     @Override

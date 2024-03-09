@@ -1,4 +1,5 @@
 package models;
+
 import java.util.ArrayList;
 
 public class Personagem {
@@ -7,13 +8,14 @@ public class Personagem {
     private String nome;
     private int nivel;
     private int PE;
-    private float PV;
-    private float PM;
+    private int PV;
+    private int PM;
     private int tempoEspera;
     private Classe classe;
     private int ID;
+    private int experiencia;
 
-    public Personagem(String nome, int nivel, int PE, float PV, float PM, Classe classe) {
+    public Personagem(String nome, int nivel, int PE, int PV, int PM, Classe classe) {
         this.nome = nome;
         this.nivel = nivel;
         this.PE = PE;
@@ -22,107 +24,85 @@ public class Personagem {
         this.tempoEspera = 0;
         this.classe = classe;
         this.ID = ++contadorID;
+        this.experiencia = 0;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public int getNivel() {
         return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     public int getPE() {
         return PE;
     }
 
-    public void setPE(int PE) {
-        this.PE = PE;
-    }
-
-    public float getPV() {
+    public int getPV() {
         return PV;
     }
 
-    public void setPV(float PV) {
+    public void setPV(int PV) {
         this.PV = PV;
     }
 
-    public float getPM() {
+    public int getPM() {
         return PM;
-    }
-
-    public void setPM(float PM) {
-        this.PM = PM;
     }
 
     public int getTempoEspera() {
         return tempoEspera;
     }
 
-    public void setTempoEspera(int tempoEspera) {
-        this.tempoEspera = tempoEspera;
-    }
-
     public Classe getClasse() {
         return classe;
-    }
-
-    public void setClasse(Classe classe) {
-        this.classe = classe;
     }
 
     public int getID() {
         return ID;
     }
 
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+
     public void ganharExperiencia(int experienciaGanha) {
-        this.PE += experienciaGanha;
+        this.experiencia += experienciaGanha;
         verificarSubidaNivel();
     }
 
     public void atacarInimigo(Personagem inimigo) {
-        float dano = calcularDano();
+        int dano = calcularDano();
         inimigo.registrarDano(dano);
     }
 
-    public void atacarEquipe(ArrayList<Personagem> equipe) {
-        for (Personagem aliado : equipe) {
-            float dano = calcularDano();
-            aliado.registrarDano(dano);
-        }
-    }
-
-    public void registrarDano(float dano) {
+    public void registrarDano(int dano) {
         this.PV -= dano;
         if (this.PV <= 0) {
             this.PV = 0;
         }
     }
 
-    private float calcularDano() {
-        return this.classe.getForca() * 0.5f;
+    private int calcularDano() {
+        return this.classe.getForca() / 2; // Ajuste para int
     }
 
-    public float calcularPVMax() {
+    public int calcularPVMax() {
         return nivel * classe.getForca() + (nivel * classe.getAgilidade() / 2);
     }
 
-    public float calcularPMMax() {
+    public int calcularPMMax() {
         return nivel * classe.getInteligencia() + (nivel * classe.getAgilidade() / 3);
     }
 
     private void verificarSubidaNivel() {
         int experienciaNecessaria = nivel * 25;
-        if (PE >= experienciaNecessaria) {
+        if (experiencia >= experienciaNecessaria) {
             subirNivel();
         }
     }
