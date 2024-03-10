@@ -26,46 +26,6 @@ public class Jogo {
         batalhar();
     }
 
-    private Arqueiro criarArqueiro() {
-        return new Arqueiro() {
-            @Override
-            public void habilidadeEspecial(Personagem alvo) {
-
-            }
-
-        };
-    }
-
-    private Guerreiro criarGuerreiro() {
-        return new Guerreiro() {
-            @Override
-            public void habilidadeEspecial(Personagem alvo) {
-
-            }
-
-        };
-    }
-
-    private Mago criarMago() {
-        return new Mago() {
-            @Override
-            public void habilidadeEspecial(Personagem alvo) {
-
-            }
-
-        };
-    }
-
-    private Monstro criarMonstro() {
-        return new Monstro() {
-            @Override
-            public void habilidadeEspecial(Personagem alvo) {
-
-            }
-
-        };
-    }
-
     private void carregarEquipesHerois() {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
@@ -76,20 +36,20 @@ public class Jogo {
             Classe classePersonagem;
             switch (classe.toLowerCase()) {
                 case "guerreiro":
-                    classePersonagem = criarGuerreiro();
+                    classePersonagem = new Guerreiro();
                     break;
                 case "arqueiro":
-                    classePersonagem = criarArqueiro();
+                    classePersonagem = new Arqueiro();
                     break;
                 case "mago":
-                    classePersonagem = criarMago();
+                    classePersonagem = new Mago();
                     break;
                 case "monstro":
-                    classePersonagem = criarMonstro();
+                    classePersonagem = new Monstro();
                     break;
                 default:
                     System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.");
-                    classePersonagem = criarGuerreiro();
+                    classePersonagem = new Guerreiro();
             }
             Personagem heroi = new Personagem(nome, 1, 0, 100, 100, classePersonagem);
             equipeHerois.adicionarPersonagem(heroi);
@@ -123,20 +83,20 @@ public class Jogo {
                 Classe classePersonagem;
                 switch (classe.toLowerCase()) {
                     case "guerreiro":
-                        classePersonagem = criarGuerreiro();
+                        classePersonagem = new Guerreiro();
                         break;
                     case "arqueiro":
-                        classePersonagem = criarArqueiro();
+                        classePersonagem = new Arqueiro();
                         break;
                     case "mago":
-                        classePersonagem = criarMago();
+                        classePersonagem = new Mago();
                         break;
                     case "monstro":
-                        classePersonagem = criarMonstro();
+                        classePersonagem = new Monstro();
                         break;
                     default:
                         System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro para o inimigo " + nome);
-                        classePersonagem = criarGuerreiro();
+                        classePersonagem = new Guerreiro();
                 }
                 Personagem inimigo = new Personagem(nome, nivel, 0, PV, PM, classePersonagem);
                 equipeInimigos.adicionarPersonagem(inimigo);
