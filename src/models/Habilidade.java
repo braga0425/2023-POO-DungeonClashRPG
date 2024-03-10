@@ -72,5 +72,14 @@ public class Habilidade {
     public int getID() {
         return ID;
     }
+    public int calcularDano(Personagem personagem){
+        return 0;
+    }
+    public int curaAliado(Personagem personagem){
+        return 0;
+    }
+    public int getPontosMagia(Personagem personagem) {
+        return 0;
+    }
 
 }

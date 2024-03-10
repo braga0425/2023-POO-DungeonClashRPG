@@ -9,9 +9,28 @@ public class Mago extends Classe {
     }
 
     private void adicionarHabilidades() {
-        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.1, 0.1, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 2, false, false));
-        adicionarHabilidade(new Habilidade("Enfraquecer", new PesosDeAtributos(0.3, 0.2, 0.5), new PesosDeAtributos(0.0, 0.0, 0.5), 5, false, false));
-        adicionarHabilidade(new Habilidade("Cura Amigo", new PesosDeAtributos(0.5, 0.2, 0.8), new PesosDeAtributos(0.0, 0.0, 0.7), 4, false, true));
+        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.1, 0.1, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 2, false, false){
+            @Override
+            public int calcularDano(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.1 + personagem.getClasse().getForca() * 0.1));
+            }
+        });
+        adicionarHabilidade(new Habilidade("Enfraquecer", new PesosDeAtributos(0.3, 0.2, 0.5), new PesosDeAtributos(0.0, 0.0, 0.5), 5, false, false){
+            @Override
+            public int calcularDano(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.2 + personagem.getClasse().getForca() * 0.3 + personagem.getClasse().getInteligencia() * 0.5));
+            }
+        });
+        adicionarHabilidade(new Habilidade("Cura Amigo", new PesosDeAtributos(0.5, 0.2, 0.8), new PesosDeAtributos(0.0, 0.0, 0.7), 4, false, true){
+            @Override
+            public int curaAliado(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.2 + personagem.getClasse().getForca() * 0.5 + personagem.getClasse().getInteligencia() * 0.8));
+            }
+            @Override
+            public int getPontosMagia(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getInteligencia() * 0.7));
+            }
+        });
     }
 
     @Override
@@ -27,43 +46,4 @@ public class Mago extends Classe {
         return "Mago";
     }
 
-    public void atacarEquipeInimiga(Equipe equipeInimiga) {
-        Personagem alvo = escolherAlvo(equipeInimiga);
-        if (alvo != null) {
-            int dano = calcularDano();
-            alvo.setPV(alvo.getPV() - dano);
-            if (alvo.getPV() <= 0) {
-                System.out.println(alvo.getNome() + " foi derrotado!");
-                equipeInimiga.removerPersonagem(alvo);
-            }
-        }
-    }
-
-    public void curarAmigo(Equipe equipeAliada) {
-        Personagem aliado = escolherAliado(equipeAliada);
-        if (aliado != null) {
-            int cura = calcularCura();
-            aliado.setPV(aliado.getPV() + cura);
-        }
-    }
-
-    private Personagem escolherAlvo(Equipe equipeInimiga) {
-        Random rand = new Random();
-        int index = rand.nextInt(equipeInimiga.getMembros().size());
-        return equipeInimiga.getMembros().get(index);
-    }
-
-    private Personagem escolherAliado(Equipe equipeAliada) {
-        Random rand = new Random();
-        int index = rand.nextInt(equipeAliada.getMembros().size());
-        return equipeAliada.getMembros().get(index);
-    }
-
-    private int calcularDano() {
-        return getInteligencia() * 2;
-    }
-
-    private int calcularCura() {
-        return getInteligencia() * 3;
-    }
 }

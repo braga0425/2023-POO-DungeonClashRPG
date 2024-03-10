@@ -9,9 +9,22 @@ public class Monstro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.8, 0.4, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 5, false, false));
-        adicionarHabilidade(new Habilidade("Chutar", new PesosDeAtributos(1.0, 0.5, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 8, false, false));
-        adicionarHabilidade(new Habilidade("Grito Atordoante", new PesosDeAtributos(0.4, 0.2, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 6, true, true));
+        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.8, 0.4, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 5, false, false) {
+            @Override
+            public int calcularDano(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.4 + personagem.getClasse().getForca() * 0.8));
+            }
+        });
+        adicionarHabilidade(new Habilidade("Chutar", new PesosDeAtributos(1.0, 0.5, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 8, false, false) {
+            public int calcularDano(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.5 + personagem.getClasse().getForca() * 1.0));
+            }
+        });
+        adicionarHabilidade(new Habilidade("Grito Atordoante", new PesosDeAtributos(0.4, 0.2, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 6, true, true) {
+            public int calcularDano(Personagem personagem) {
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.2 + personagem.getClasse().getForca() * 0.4));
+            }
+        });
     }
 
     @Override
@@ -25,27 +38,5 @@ public class Monstro extends Classe {
     @Override
     public String getNome() {
         return "Monstro";
-    }
-
-    public void atacarEquipeHerois(Equipe equipeHerois) {
-        Personagem alvo = escolherAlvo(equipeHerois);
-        if (alvo != null) {
-            int dano = calcularDano();
-            alvo.setPV(alvo.getPV() - dano);
-            if (alvo.getPV() <= 0) {
-                System.out.println(alvo.getNome() + " foi derrotado!");
-                equipeHerois.removerPersonagem(alvo);
-            }
-        }
-    }
-
-    private Personagem escolherAlvo(Equipe equipeHerois) {
-        Random rand = new Random();
-        int index = rand.nextInt(equipeHerois.getMembros().size());
-        return equipeHerois.getMembros().get(index);
-    }
-
-    private int calcularDano() {
-        return getForca() * 2;
     }
 }
