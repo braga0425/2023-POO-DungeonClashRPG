@@ -1,7 +1,11 @@
 Ogro Monstro 1
-fase
-Um grupo de alunos caminhava tranquilamente pelo campus, quando se deparam com uma criatura estranha. Depois de um grito horrendo, ela para cima dos alunos. É hora de usar suas habilidades para derrotar a criatura!
-Gobbling Monstro 1
+
+fase Um grupo de alunos caminhava tranquilamente pelo campus, quando se deparam com uma criatura estranha. Depois de um grito horrendo, ela para cima dos alunos. É hora de usar suas habilidades para derrotar a criatura!
+
+ZumbiGobbling Monstro 1
+
 ZumbiGuerreiro Guerreiro 2
-fase
-Após derrotar o Ogro, o grupo segue em direção ao RU. Lá se deparam com duas criaturas estranhas. É hora de usar suas habilidades para derrotar os zumbis!
+
+fase Após derrotar o Ogro, o grupo segue em direção ao RU. Lá se deparam com duas criaturas estranhas. É hora de usar suas habilidades para derrotar os zumbis!
+
+
