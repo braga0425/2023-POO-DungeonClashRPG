@@ -117,5 +117,5 @@ public class Personagem {
     public void setTempoEspera(int tempoEspera) {
         this.tempoEspera = tempoEspera;
     }
-    
+
 }

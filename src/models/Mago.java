@@ -2,7 +2,7 @@ package models;
 
 import java.util.Random;
 
-public abstract class Mago extends Classe {
+public class Mago extends Classe {
     public Mago() {
         super(14, 10, 12);
         adicionarHabilidades();
@@ -15,11 +15,21 @@ public abstract class Mago extends Classe {
     }
 
     @Override
+    public void habilidadeEspecial(Personagem alvo) {
+
+    }
+
+    @Override
     public void ganharExperiencia(int experienciaGanha) {
         super.ganharExperiencia(experienciaGanha);
         setAgilidade(getAgilidade() + 2);
         setInteligencia(getInteligencia() + 3);
         setForca(getForca() + 1);
+    }
+
+    @Override
+    public String getNome() {
+        return "Mago";
     }
 
     public void atacarEquipeInimiga(Equipe equipeInimiga) {

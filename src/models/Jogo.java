@@ -159,19 +159,19 @@ public class Jogo {
 
         for (Personagem personagem : membros) {
             System.out.println("ID: " + personagem.getID() + " | Nome: " + personagem.getNome() + " | Classe: " +
-                    personagem.getClass().getSimpleName() + " | PV: " + personagem.getPV() +
+                    personagem.getClasse().getNome() + " | PV: " + personagem.getPV() +
                     " | PM: " + personagem.getPM() + " | Nível: " + personagem.getNivel() +
                     " | Tempo de Espera: " + personagem.getTempoEspera());
         }
     }
 
     private void batalhar() {
-       /* while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
+        while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
             Personagem primeiroAtacante = sortearPrimeiroAtacante();
             System.out.println(primeiroAtacante.getNome() + " é o próximo a atacar!\n");
             atacar(primeiroAtacante);
             proximoTurno();
-        }*/
+        }
         if (equipeHerois.getMembros().isEmpty()) {
             System.out.println("Os heróis foram derrotados!");
         } else {

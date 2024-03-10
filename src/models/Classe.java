@@ -63,4 +63,6 @@ public abstract class Classe {
     public int getPM() {
         return 0;
     }
+
+    public abstract String getNome();
 }

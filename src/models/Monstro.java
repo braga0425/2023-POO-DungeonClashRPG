@@ -2,7 +2,7 @@ package models;
 
 import java.util.Random;
 
-public abstract class Monstro extends Classe {
+public class Monstro extends Classe {
     public Monstro() {
         super(18, 8, 6);
         adicionarHabilidades();
@@ -15,11 +15,21 @@ public abstract class Monstro extends Classe {
     }
 
     @Override
+    public void habilidadeEspecial(Personagem alvo) {
+
+    }
+
+    @Override
     public void ganharExperiencia(int experienciaGanha) {
         super.ganharExperiencia(experienciaGanha);
         setAgilidade(getAgilidade() + 1);
         setInteligencia(getInteligencia() + 1);
         setForca(getForca() + 4);
+    }
+
+    @Override
+    public String getNome() {
+        return "Monstro";
     }
 
     public void atacarEquipeHerois(Equipe equipeHerois) {
