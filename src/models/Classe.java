@@ -51,8 +51,6 @@ public abstract class Classe {
         habilidades.add(habilidade);
     }
 
-    public abstract void habilidadeEspecial(Personagem alvo);
-
     protected void ganharExperiencia(int experienciaGanha) {
     }
 

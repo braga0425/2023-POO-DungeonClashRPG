@@ -15,11 +15,6 @@ public class Guerreiro extends Classe {
     }
 
     @Override
-    public void habilidadeEspecial(Personagem alvo) {
-
-    }
-
-    @Override
     public void ganharExperiencia(int experienciaGanha) {
         super.ganharExperiencia(experienciaGanha);
         setAgilidade(getAgilidade() + 1);
