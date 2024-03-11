@@ -31,7 +31,7 @@ public class Jogo {
 
             // Verificar o resultado da batalha
             if (equipeInimigos.getMembros().isEmpty()) {
-                if (faseAtual < 2) {
+                if (faseAtual < 1) {
                     faseAtual++;
                     cont = 1;
                 } else {
@@ -143,7 +143,6 @@ public class Jogo {
 
     private void iniciarBatalha() {
         exibirInformacoesEquipes();
-        faseAtual = faseAtual - 1;
         System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
         batalhar();
     }
@@ -153,6 +152,7 @@ public class Jogo {
         exibirInformacoesEquipe(equipeHerois);
         System.out.println("\nEquipe dos Inimigos:\n");
         exibirInformacoesEquipe(equipeInimigos);
+        pegarPontosExperiencia();
     }
 
     private void exibirInformacoesEquipe(Equipe equipe) {
@@ -190,18 +190,17 @@ public class Jogo {
                 faseAtual++;
                 cont = 1;
             } else {
-                System.out.println("Os heróis venceram a batalha!\n");
-                distribuirPontosExperiencia();
-                faseAtual++;
-                cont = 1;
+            System.out.println("Os heróis venceram a batalha!\n");
+            faseAtual++;
+            cont = 1;
             }
         } else {
             System.out.println("Os heróis foram derrotados!\n");
         }
 
-        if (faseAtual < 2) {
-            equipeInimigos = new Equipe(); // Reinicia a equipe de inimigos
-        }
+        //if (faseAtual < 2) {
+          //  equipeInimigos = new Equipe(); // Reinicia a equipe de inimigos
+     //   }
     }
 
     private Personagem sortearAlvo(Equipe equipe) {
@@ -314,6 +313,7 @@ public class Jogo {
             exibirInformacoesEquipes();
             if (alvoAleatorio.getPV() <= 0) {
                 System.out.println("\n" + alvoAleatorio.getNome() + " foi derrotado!\n");
+                distribuirPontosExperiencia();
                 equipeAlvo.removerPersonagem(alvoAleatorio);
             }
         }
@@ -325,17 +325,20 @@ public class Jogo {
     }
 
     private void distribuirPontosExperiencia() {
+        int experienciaTotal = pegarPontosExperiencia();
+        ArrayList<Personagem> heroisSobreviventes = equipeHerois.getMembros();
+        equipeHerois.computarPontosExperiencia(experienciaTotal);
+        for (Personagem heroi : heroisSobreviventes) {
+            System.out.println(heroi.getNome()+ " ganhou " + experienciaTotal + " pontos de experiência!");
+        }
+    }
+
+    private int pegarPontosExperiencia(){
         int pontosExperiencia = 0;
         for (Personagem inimigoDerrotado : equipeInimigos.getMembros()) {
-            pontosExperiencia += inimigoDerrotado.getNivel() * 10;
+            pontosExperiencia = inimigoDerrotado.getNivel() * 5;
         }
-
-        ArrayList<Personagem> heroisSobreviventes = equipeHerois.getMembros();
-        int pontosPorHeroi = pontosExperiencia / heroisSobreviventes.size();
-        for (Personagem heroi : heroisSobreviventes) {
-            heroi.setExperiencia(heroi.getExperiencia() + pontosPorHeroi);
-            System.out.println(heroi.getNome() + " ganhou " + pontosPorHeroi + " pontos de experiência!");
-        }
+        return pontosExperiencia;
     }
 
     private boolean todosInimigosDerrotados() {

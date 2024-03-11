@@ -10,7 +10,6 @@ public class Personagem {
     private int tempoEspera;
     private Classe classe;
     private int ID;
-    private int experiencia;
 
     public Personagem(String nome, int nivel, int PE, int PV, int PM, Classe classe) {
         this.nome = nome;
@@ -21,7 +20,6 @@ public class Personagem {
         this.tempoEspera = 0;
         this.classe = classe;
         this.ID = ++contadorID;
-        this.experiencia = 0;
     }
 
     public String getNome() {
@@ -64,16 +62,9 @@ public class Personagem {
         return ID;
     }
 
-    public int getExperiencia() {
-        return experiencia;
-    }
-
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
-    }
 
     public void ganharExperiencia(int experienciaGanha) {
-        this.experiencia += experienciaGanha;
+        this.PE += experienciaGanha;
         verificarSubidaNivel();
     }
 
@@ -103,7 +94,7 @@ public class Personagem {
 
     private void verificarSubidaNivel() {
         int experienciaNecessaria = nivel * 25;
-        if (experiencia >= experienciaNecessaria) {
+        if (PE >= experienciaNecessaria) {
             subirNivel();
         }
     }
