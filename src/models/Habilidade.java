@@ -2,7 +2,6 @@ package models;
 
 public class Habilidade {
     private static int contadorID = 0;
-
     private String nome;
     private PesosDeAtributos pesosDano;
     private PesosDeAtributos pesosMana;
@@ -72,12 +71,15 @@ public class Habilidade {
     public int getID() {
         return ID;
     }
-    public int calcularDano(Personagem personagem){
+
+    public int calcularDano(Personagem personagem) {
         return 0;
     }
-    public int curaAliado(Personagem personagem){
+
+    public int curaAliado(Personagem personagem) {
         return 0;
     }
+
     public int getPontosMagia(Personagem personagem) {
         return 0;
     }

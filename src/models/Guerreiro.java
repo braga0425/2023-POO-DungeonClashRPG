@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Random;
-
 public class Guerreiro extends Classe {
     public Guerreiro() {
         super(14, 10, 12);

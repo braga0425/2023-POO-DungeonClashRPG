@@ -1,7 +1,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Equipe {
     private ArrayList<Personagem> membros;
@@ -63,6 +62,10 @@ public class Equipe {
                 personagem.setTempoEspera(tempoEspera - 1);
             }
         }
+    }
+
+    public boolean estaVazia() {
+        return membros.isEmpty();
     }
 
 }

@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Random;
-
 public class Monstro extends Classe {
     public Monstro() {
         super(18, 8, 6);

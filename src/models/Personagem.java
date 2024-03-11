@@ -1,10 +1,7 @@
 package models;
 
-import java.util.ArrayList;
-
 public class Personagem {
     private static int contadorID = 0;
-
     private String nome;
     private int nivel;
     private int PE;
