@@ -68,7 +68,7 @@ public class Jogo {
                     classePersonagem = new Monstro();
                     break;
                 default:
-                    System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.\n");
+                    System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.");
                     classePersonagem = new Guerreiro();
             }
             Personagem heroi = new Personagem(nome, 1, 0, 100, 100, classePersonagem);
