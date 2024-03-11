@@ -5,10 +5,8 @@ public class PesosDeAtributos {
     private double pesoAgilidade;
     private double pesoInteligencia;
 
-    public PesosDeAtributos(double pesoForca, double pesoAgilidade, double pesoInteligencia) {
-        this.pesoForca = pesoForca;
-        this.pesoAgilidade = pesoAgilidade;
-        this.pesoInteligencia = pesoInteligencia;
+    public PesosDeAtributos() {
+        // Construtor vazio
     }
 
     public double getPesoForca() {

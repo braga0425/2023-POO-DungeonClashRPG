@@ -7,20 +7,36 @@ public class Monstro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.8, 0.4, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 5, false, false) {
+        // Habilidade "Socar"
+        PesosDeAtributos pesosSocar = new PesosDeAtributos();
+        pesosSocar.setPesoForca(0.8);
+        pesosSocar.setPesoAgilidade(0.4);
+        adicionarHabilidade(new Habilidade("Socar", pesosSocar, new PesosDeAtributos(), 5, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.4 + personagem.getClasse().getForca() * 0.8));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosSocar.getPesoAgilidade() + personagem.getClasse().getForca() * pesosSocar.getPesoForca()));
             }
         });
-        adicionarHabilidade(new Habilidade("Chutar", new PesosDeAtributos(1.0, 0.5, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 8, false, false) {
+
+        // Habilidade "Chutar"
+        PesosDeAtributos pesosChutar = new PesosDeAtributos();
+        pesosChutar.setPesoForca(1.0);
+        pesosChutar.setPesoAgilidade(0.5);
+        adicionarHabilidade(new Habilidade("Chutar", pesosChutar, new PesosDeAtributos(), 8, false, false) {
+            @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.5 + personagem.getClasse().getForca() * 1.0));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosChutar.getPesoAgilidade() + personagem.getClasse().getForca() * pesosChutar.getPesoForca()));
             }
         });
-        adicionarHabilidade(new Habilidade("Grito Atordoante", new PesosDeAtributos(0.4, 0.2, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 6, true, true) {
+
+        // Habilidade "Grito Atordoante"
+        PesosDeAtributos pesosGritoAtordoante = new PesosDeAtributos();
+        pesosGritoAtordoante.setPesoForca(0.4);
+        pesosGritoAtordoante.setPesoAgilidade(0.2);
+        adicionarHabilidade(new Habilidade("Grito Atordoante", pesosGritoAtordoante, new PesosDeAtributos(), 6, true, true) {
+            @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.2 + personagem.getClasse().getForca() * 0.4));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosGritoAtordoante.getPesoAgilidade() + personagem.getClasse().getForca() * pesosGritoAtordoante.getPesoForca()));
             }
         });
     }
