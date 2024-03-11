@@ -43,23 +43,11 @@ public abstract class Classe {
         return habilidades;
     }
 
-    public void setHabilidades(ArrayList<Habilidade> habilidades) {
-        this.habilidades = habilidades;
-    }
-
     public void adicionarHabilidade(Habilidade habilidade) {
         habilidades.add(habilidade);
     }
 
     protected void ganharExperiencia(int experienciaGanha) {
-    }
-
-    public int atacar(Personagem alvo) {
-        return 0;
-    }
-
-    public int getPM() {
-        return 0;
     }
 
     public abstract String getNome();

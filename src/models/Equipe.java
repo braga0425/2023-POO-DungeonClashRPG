@@ -18,18 +18,6 @@ public class Equipe {
         membros.remove(personagem);
     }
 
-    public Personagem buscarPersonagemPorID(int ID) {
-        if (ID <= 0) {
-            return null;
-        }
-        for (Personagem personagem : membros) {
-            if (personagem.getID() == ID) {
-                return personagem;
-            }
-        }
-        return null;
-    }
-
     public ArrayList<Personagem> getMembros() {
         return new ArrayList<>(membros);
     }
@@ -38,21 +26,6 @@ public class Equipe {
         for (Personagem personagem : membros) {
             personagem.ganharExperiencia(experienciaGanha);
         }
-    }
-
-    public Personagem proximoAtacante() {
-        Personagem proximo = null;
-        int menorTempoEspera = Integer.MAX_VALUE;
-        for (Personagem personagem : membros) {
-            int tempoEspera = personagem.getTempoEspera();
-            if (tempoEspera == 0 && personagem.getPV() > 0) {
-                return personagem;
-            } else if (tempoEspera < menorTempoEspera) {
-                menorTempoEspera = tempoEspera;
-                proximo = personagem;
-            }
-        }
-        return proximo;
     }
 
     public void atualizarTempoEspera() {
@@ -64,7 +37,4 @@ public class Equipe {
         }
     }
 
-    public boolean estaVazia() {
-        return membros.isEmpty();
-    }
 }

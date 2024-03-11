@@ -62,26 +62,9 @@ public class Personagem {
         return ID;
     }
 
-
     public void ganharExperiencia(int experienciaGanha) {
         this.PE += experienciaGanha;
         verificarSubidaNivel();
-    }
-
-    public void atacarInimigo(Personagem inimigo) {
-        int dano = calcularDano();
-        inimigo.registrarDano(dano);
-    }
-
-    public void registrarDano(int dano) {
-        this.PV -= dano;
-        if (this.PV <= 0) {
-            this.PV = 0;
-        }
-    }
-
-    private int calcularDano() {
-        return this.classe.getForca() / 2;
     }
 
     public int calcularPVMax() {

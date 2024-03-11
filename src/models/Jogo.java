@@ -340,10 +340,6 @@ public class Jogo {
         return pontosExperiencia;
     }
 
-    private boolean todosInimigosDerrotados() {
-        return equipeInimigos.getMembros().isEmpty();
-    }
-
     private boolean faseConcluida() {
         return faseAtual > 2;
     }
