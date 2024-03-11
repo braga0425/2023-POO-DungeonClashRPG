@@ -26,7 +26,7 @@ public class Jogo {
         while (!equipeHerois.getMembros().isEmpty()) {
             carregarEquipesInimigos();
             exibirInformacoesEquipes();
-            System.out.println("Começa a batalha na fase " + faseAtual + "!\n");
+            System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
             batalhar();
 
             // Verificar o resultado da batalha
@@ -35,11 +35,11 @@ public class Jogo {
                     faseAtual++;
                     cont = 1;
                 } else {
-                    System.out.println("Parabéns! Os heróis venceram todas as fases!");
+                    System.out.println("Parabéns! Os heróis venceram todas as fases!\n");
                     break;
                 }
             } else {
-                System.out.println("Os heróis foram derrotados na fase " + faseAtual + "!");
+                System.out.println("Os heróis foram derrotados na fase " + faseAtual + "!\n");
                 break;
             }
         }
@@ -49,9 +49,9 @@ public class Jogo {
     private void carregarEquipesHerois() {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
-            System.out.println("Digite o nome do herói " + (i + 1) + ": ");
+            System.out.println("\nDigite o nome do herói " + (i + 1) + ": ");
             String nome = scanner.nextLine();
-            System.out.println("Escolha a classe do herói " + (i + 1) + " (Guerreiro, Arqueiro, Mago ou Monstro): ");
+            System.out.println("\nEscolha a classe do herói " + (i + 1) + " (Guerreiro, Arqueiro, Mago ou Monstro): ");
             String classe = scanner.nextLine();
             Classe classePersonagem;
             switch (classe.toLowerCase()) {
@@ -68,7 +68,7 @@ public class Jogo {
                     classePersonagem = new Monstro();
                     break;
                 default:
-                    System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.");
+                    System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.\n");
                     classePersonagem = new Guerreiro();
             }
             Personagem heroi = new Personagem(nome, 1, 0, 100, 100, classePersonagem);
@@ -81,10 +81,9 @@ public class Jogo {
         try (BufferedReader br = new BufferedReader(new FileReader("src/utils/jogo.txt"))) {
             String linha;
             boolean lerInimigos = true; // Começar a ler os inimigos
-            //sempre lendo a primeira equipe
             while ((linha = br.readLine()) != null) {
                 if (linha.startsWith("fase")) {
-                    System.out.println(linha.substring(5) + "\n");
+                    System.out.println("\n" + linha.substring(5));
                     iniciarBatalha(); // Iniciar a batalha se não estivermos lendo inimigos pela primeira vez
                     lerInimigos = true; // Parar de ler os inimigos após encontrar a indicação de fase
 
@@ -101,7 +100,7 @@ public class Jogo {
                     // Processar a linha como um inimigo somente se estamos lendo inimigos
                     String[] partes = linha.split(" ");
                     if (partes.length < 2) {
-                        System.out.println("Linha inválida: " + linha);
+                        System.out.println("Linha inválida: \n" + linha);
                         continue;
                     }
 
@@ -125,7 +124,7 @@ public class Jogo {
                             classePersonagem = new Monstro();
                             break;
                         default:
-                            System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro para o inimigo " + nome);
+                            System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro para o inimigo. \n" + nome);
                             classePersonagem = new Guerreiro();
                     }
                     Personagem inimigo = new Personagem(nome, nivel, 0, PV, PM, classePersonagem);
@@ -145,14 +144,14 @@ public class Jogo {
     private void iniciarBatalha() {
         exibirInformacoesEquipes();
         faseAtual = faseAtual - 1;
-        System.out.println("Começa a batalha na fase " + faseAtual + "!\n");
+        System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
         batalhar();
     }
 
     private void exibirInformacoesEquipes() {
-        System.out.println("Equipe dos Heróis:");
+        System.out.println("\nEquipe dos Heróis:\n");
         exibirInformacoesEquipe(equipeHerois);
-        System.out.println("\nEquipe dos Inimigos:");
+        System.out.println("\nEquipe dos Inimigos:\n");
         exibirInformacoesEquipe(equipeInimigos);
     }
 
@@ -169,15 +168,15 @@ public class Jogo {
 
     private void batalhar() {
         while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
-            System.out.println("Turno " + cont + ":\n");
+            System.out.println("\nTurno " + cont + ":");
 
             if (!equipeInimigos.getMembros().isEmpty()) {
-                System.out.println("Equipe dos Heróis ataca:\n");
+                System.out.println("\nEquipe dos Heróis ataca:");
                 ataqueAleatorio(equipeHerois, equipeInimigos);
             }
 
             if (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
-                System.out.println("Equipe dos Inimigos ataca:\n");
+                System.out.println("\nEquipe dos Inimigos ataca:");
                 ataqueAleatorio(equipeInimigos, equipeHerois);
             }
 
@@ -191,13 +190,13 @@ public class Jogo {
                 faseAtual++;
                 cont = 1;
             } else {
-                System.out.println("Os heróis venceram a batalha!");
+                System.out.println("Os heróis venceram a batalha!\n");
                 distribuirPontosExperiencia();
                 faseAtual++;
                 cont = 1;
             }
         } else {
-            System.out.println("Os heróis foram derrotados!");
+            System.out.println("Os heróis foram derrotados!\n");
         }
 
         if (faseAtual < 2) {
@@ -212,7 +211,7 @@ public class Jogo {
             int index = rand.nextInt(equipe.getMembros().size());
             return equipe.getMembros().get(index);
         } else {
-            System.out.println("A equipe está vazia, não é possível sortear um alvo.");
+            //System.out.println("A equipe está vazia, não é possível sortear um alvo.");
             return null;
         }
     }
@@ -250,7 +249,7 @@ public class Jogo {
         int indexAlvo = rand.nextInt(membrosAlvo.size());
         Personagem alvoAleatorio = membrosAlvo.get(indexAlvo);
 
-        System.out.println("Selecione a habilidade para " + atacante.getNome() + ":");
+        System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
         for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
             System.out.println((i + 1) + " - " + atacante.getClasse().getHabilidades().get(i).getNome());
         }
@@ -265,7 +264,7 @@ public class Jogo {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Escolha inválida. Digite um número entre 1 e " + atacante.getClasse().getHabilidades().size() + ".");
+                System.out.println("Escolha inválida. Digite um número entre 1 e " + atacante.getClasse().getHabilidades().size() + ".\n");
             }
         } while (escolhaHabilidade <= 0 || escolhaHabilidade > atacante.getClasse().getHabilidades().size());
 
@@ -275,7 +274,7 @@ public class Jogo {
 
         if (atacante.getClasse() instanceof Mago && habilidadeEscolhida.isAfetaAmigos()) {
             // Mostra os membros da equipe para que o jogador escolha um aliado para curar
-            System.out.println("Escolha o aliado para curar:");
+            System.out.println("Escolha o aliado para curar:\n");
             for (int i = 0; i < equipeAtacante.getMembros().size(); i++) {
                 Personagem aliado = equipeAtacante.getMembros().get(i);
                 System.out.println((i + 1) + " - " + aliado.getNome());
@@ -291,18 +290,18 @@ public class Jogo {
                 aliadoCura.setPV(aliadoCura.getPV() + cura);
 
                 // Exibe mensagem de cura
-                System.out.println(atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.");
+                System.out.println(atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.\n");
             } else {
-                System.out.println("Escolha de aliado inválida.");
+                System.out.println("Escolha de aliado inválida.\n");
             }
         } else if (atacante.getClasse() instanceof Monstro && habilidadeEscolhida.isAfetaTodos()) {
             ArrayList<Personagem> membrosEquipeAlvo = equipeAlvo.getMembros();
             for (Personagem todosAlvo : membrosEquipeAlvo) {
                 int dano = habilidadeEscolhida.calcularDano(atacante);
                 todosAlvo.setPV(todosAlvo.getPV() - dano);
-                System.out.println(todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!");
+                System.out.println(todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!\n");
                 if (alvo.getPV() <= 0) {
-                    System.out.println(todosAlvo.getNome() + " foi derrotado!");
+                    System.out.println("\n" + todosAlvo.getNome() + " foi derrotado!\n");
                     equipeAlvo.removerPersonagem(alvo);
                 }
             }
@@ -314,7 +313,7 @@ public class Jogo {
 
             exibirInformacoesEquipes();
             if (alvoAleatorio.getPV() <= 0) {
-                System.out.println(alvoAleatorio.getNome() + " foi derrotado!");
+                System.out.println("\n" + alvoAleatorio.getNome() + " foi derrotado!\n");
                 equipeAlvo.removerPersonagem(alvoAleatorio);
             }
         }
