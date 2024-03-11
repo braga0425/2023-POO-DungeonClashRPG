@@ -7,22 +7,42 @@ public class Guerreiro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.3, 0.1, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 4, false, false) {
+        // Habilidade "Socar"
+        PesosDeAtributos pesosSocar = new PesosDeAtributos();
+        pesosSocar.setPesoForca(0.3);
+        pesosSocar.setPesoAgilidade(0.1);
+        adicionarHabilidade(new Habilidade("Socar", pesosSocar, new PesosDeAtributos(), 4, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.1 + personagem.getClasse().getForca() * 0.3));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosSocar.getPesoAgilidade() + personagem.getClasse().getForca() * pesosSocar.getPesoForca()));
             }
         });
-        adicionarHabilidade(new Habilidade("Golpe de Espada", new PesosDeAtributos(0.7, 0.3, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 5, false, false) {
+
+        // Habilidade "Golpe de Espada"
+        PesosDeAtributos pesosGolpeEspada = new PesosDeAtributos();
+        pesosGolpeEspada.setPesoForca(0.7);
+        pesosGolpeEspada.setPesoAgilidade(0.3);
+        adicionarHabilidade(new Habilidade("Golpe de Espada", pesosGolpeEspada, new PesosDeAtributos(), 5, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.3 + personagem.getClasse().getForca() * 0.7));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosGolpeEspada.getPesoAgilidade() + personagem.getClasse().getForca() * pesosGolpeEspada.getPesoForca()));
             }
         });
-        adicionarHabilidade(new Habilidade("Espada Flamejante", new PesosDeAtributos(0.3, 0.5, 0.4), new PesosDeAtributos(0.2, 0.0, 1.0), 7, false, false) {
+
+        // Habilidade "Espada Flamejante"
+        PesosDeAtributos pesosEspadaFlamejante = new PesosDeAtributos();
+        pesosEspadaFlamejante.setPesoForca(0.3);
+        pesosEspadaFlamejante.setPesoAgilidade(0.5);
+        pesosEspadaFlamejante.setPesoInteligencia(0.4);
+
+        PesosDeAtributos custoEspadaFlamejante = new PesosDeAtributos();
+        custoEspadaFlamejante.setPesoForca(0.2);
+        custoEspadaFlamejante.setPesoInteligencia(1.0);
+
+        adicionarHabilidade(new Habilidade("Espada Flamejante", pesosEspadaFlamejante, custoEspadaFlamejante, 7, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.5 + personagem.getClasse().getForca() * 0.3 + personagem.getClasse().getInteligencia() * 0.4));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosEspadaFlamejante.getPesoAgilidade() + personagem.getClasse().getForca() * pesosEspadaFlamejante.getPesoForca() + personagem.getClasse().getInteligencia() * pesosEspadaFlamejante.getPesoInteligencia()));
             }
 
             @Override

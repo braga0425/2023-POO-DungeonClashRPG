@@ -161,8 +161,7 @@ public class Jogo {
         for (Personagem personagem : membros) {
             System.out.println("ID: " + personagem.getID() + " | Nome: " + personagem.getNome() + " | Classe: " +
                     personagem.getClasse().getNome() + " | PV: " + personagem.getPV() +
-                    " | PM: " + personagem.getPM() + " | Nível: " + personagem.getNivel() +
-                    " | Tempo de Espera: " + personagem.getTempoEspera());
+                    " | PM: " + personagem.getPM() + " | Nível: " + personagem.getNivel());
         }
     }
 

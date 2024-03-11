@@ -7,22 +7,43 @@ public class Arqueiro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        adicionarHabilidade(new Habilidade("Socar", new PesosDeAtributos(0.5, 0.1, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 3, false, false) {
+        // Habilidade "Socar"
+        PesosDeAtributos pesosSocar = new PesosDeAtributos();
+        pesosSocar.setPesoForca(0.5);
+        pesosSocar.setPesoAgilidade(0.1);
+        pesosSocar.setPesoInteligencia(0.0);
+        adicionarHabilidade(new Habilidade("Socar", pesosSocar, new PesosDeAtributos(), 3, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.1 + personagem.getClasse().getForca() * 0.5));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosSocar.getPesoAgilidade() + personagem.getClasse().getForca() * pesosSocar.getPesoForca()));
             }
         });
-        adicionarHabilidade(new Habilidade("Atirar Flecha", new PesosDeAtributos(0.3, 0.5, 0.0), new PesosDeAtributos(0.0, 0.0, 0.0), 4, false, false) {
+
+        // Habilidade "Atirar Flecha"
+        PesosDeAtributos pesosAtirarFlecha = new PesosDeAtributos();
+        pesosAtirarFlecha.setPesoForca(0.3);
+        pesosAtirarFlecha.setPesoAgilidade(0.5);
+        adicionarHabilidade(new Habilidade("Atirar Flecha", pesosAtirarFlecha, new PesosDeAtributos(), 4, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.3 + personagem.getClasse().getForca() * 0.5));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosAtirarFlecha.getPesoAgilidade() + personagem.getClasse().getForca() * pesosAtirarFlecha.getPesoForca()));
             }
         });
-        adicionarHabilidade(new Habilidade("Flecha Encantada", new PesosDeAtributos(0.3, 0.5, 0.4), new PesosDeAtributos(0.0, 0.2, 1.0), 7, false, false) {
+
+        // Habilidade "Flecha Encantada"
+        PesosDeAtributos pesosFlechaEncantada = new PesosDeAtributos();
+        pesosFlechaEncantada.setPesoForca(0.3);
+        pesosFlechaEncantada.setPesoAgilidade(0.5);
+        pesosFlechaEncantada.setPesoInteligencia(0.4);
+
+        PesosDeAtributos custoFlechaEncantada = new PesosDeAtributos();
+        custoFlechaEncantada.setPesoAgilidade(0.2);
+        custoFlechaEncantada.setPesoInteligencia(1.0);
+
+        adicionarHabilidade(new Habilidade("Flecha Encantada", pesosFlechaEncantada, custoFlechaEncantada, 7, false, false) {
             @Override
             public int calcularDano(Personagem personagem) {
-                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * 0.5 + personagem.getClasse().getForca() * 0.3 + personagem.getClasse().getInteligencia() * 0.4));
+                return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getAgilidade() * pesosFlechaEncantada.getPesoAgilidade() + personagem.getClasse().getForca() * pesosFlechaEncantada.getPesoForca() + personagem.getClasse().getInteligencia() * pesosFlechaEncantada.getPesoInteligencia()));
             }
 
             @Override
