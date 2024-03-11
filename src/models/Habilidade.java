@@ -83,5 +83,4 @@ public class Habilidade {
     public int getPontosMagia(Personagem personagem) {
         return 0;
     }
-
 }

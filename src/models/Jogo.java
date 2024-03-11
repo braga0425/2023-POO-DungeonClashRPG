@@ -345,5 +345,4 @@ public class Jogo {
     private boolean faseConcluida() {
         return faseAtual > 2;
     }
-
 }

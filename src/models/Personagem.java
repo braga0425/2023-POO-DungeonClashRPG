@@ -52,6 +52,10 @@ public class Personagem {
         return tempoEspera;
     }
 
+    public void setTempoEspera(int tempoEspera) {
+        this.tempoEspera = tempoEspera;
+    }
+
     public Classe getClasse() {
         return classe;
     }
@@ -110,9 +114,4 @@ public class Personagem {
         PV = calcularPVMax();
         PM = calcularPMMax();
     }
-
-    public void setTempoEspera(int tempoEspera) {
-        this.tempoEspera = tempoEspera;
-    }
-
 }

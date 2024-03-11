@@ -44,5 +44,4 @@ public class Arqueiro extends Classe {
     public String getNome() {
         return "Arqueiro";
     }
-
 }

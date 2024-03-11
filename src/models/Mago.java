@@ -44,5 +44,4 @@ public class Mago extends Classe {
     public String getNome() {
         return "Mago";
     }
-
 }

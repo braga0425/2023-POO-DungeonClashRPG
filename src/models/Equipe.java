@@ -67,5 +67,4 @@ public class Equipe {
     public boolean estaVazia() {
         return membros.isEmpty();
     }
-
 }
