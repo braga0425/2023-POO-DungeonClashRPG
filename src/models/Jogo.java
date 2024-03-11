@@ -202,9 +202,6 @@ public class Jogo {
 
         if (faseAtual < 2) {
             equipeInimigos = new Equipe(); // Reinicia a equipe de inimigos
-//            carregarEquipesInimigos(); MsSc. Bch. Gustavo H Rehbein comentou isso
-//            Celma Westphal
-//            Selma Westphal
         }
     }
 
@@ -350,8 +347,4 @@ public class Jogo {
         return faseAtual > 2;
     }
 
-    public static void main(String[] args) {
-        Jogo jogo = new Jogo();
-        jogo.iniciarJogo();
-    }
 }
