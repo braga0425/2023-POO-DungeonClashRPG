@@ -326,7 +326,11 @@ public class Jogo {
                 exibirInformacoesEquipes();
                 if (alvo.getPV() <= 0) {
                     System.out.println("\n" + alvo.getNome() + " foi derrotado!\n");
-                    distribuirPontosExperiencia();
+                    if (equipeAtacante.equals(equipeHerois)) {
+                        distribuirPontosExperiencia(true); // Herói derrotou inimigo
+                    } else {
+                        distribuirPontosExperiencia(false); // Inimigo derrotou herói
+                    }
                     equipeAlvo.removerPersonagem(alvo);
                 }
             }
@@ -344,13 +348,23 @@ public class Jogo {
     }
 
 
-    private void distribuirPontosExperiencia() {
+    private void distribuirPontosExperiencia(boolean heroiDerrotouInimigo) {
         int experienciaTotal = pegarPontosExperiencia();
-        ArrayList<Personagem> heroisSobreviventes = equipeHerois.getMembros();
-        equipeHerois.computarPontosExperiencia(experienciaTotal);
-        for (Personagem heroi : heroisSobreviventes) {
-            System.out.println(heroi.getNome()+ " ganhou " + experienciaTotal + " pontos de experiência!");
-            heroi.setTempoEspera(0);
+
+        if (heroiDerrotouInimigo) {
+            ArrayList<Personagem> heroisSobreviventes = equipeHerois.getMembros(); // Obtém os heróis sobreviventes
+            equipeHerois.computarPontosExperiencia(experienciaTotal); // Distribui a experiência entre os heróis sobreviventes
+            for (Personagem heroi : heroisSobreviventes) {
+                System.out.println(heroi.getNome() + " ganhou " + experienciaTotal + " pontos de experiência!");
+                heroi.setTempoEspera(0);
+            }
+        } else {
+            ArrayList<Personagem> inimigosSobreviventes = equipeInimigos.getMembros(); // Obtém os inimigos sobreviventes
+            equipeInimigos.computarPontosExperiencia(experienciaTotal); // Distribui a experiência entre os inimigos sobreviventes
+            for (Personagem inimigo : inimigosSobreviventes) {
+                System.out.println(inimigo.getNome() + " ganhou " + experienciaTotal + " pontos de experiência!");
+                inimigo.setTempoEspera(0);
+            }
         }
     }
 
