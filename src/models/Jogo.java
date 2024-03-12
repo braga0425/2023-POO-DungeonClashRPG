@@ -75,7 +75,6 @@ public class Jogo {
 
             int PV = heroi.calcularPVMax();
             int PM = heroi.calcularPMMax();
-            System.out.println("PM: "+ PM);
             heroi.setPV(PV);
             heroi.setPM(PM);
             equipeHerois.adicionarPersonagem(heroi);
@@ -218,10 +217,6 @@ public class Jogo {
         } else {
             System.out.println("Os heróis foram derrotados!\n");
         }
-
-        //if (faseAtual < 2) {
-          //  equipeInimigos = new Equipe(); // Reinicia a equipe de inimigos
-     //   }
     }
 
     private Personagem sortearAlvo(Equipe equipe) {
@@ -241,15 +236,27 @@ public class Jogo {
             return; // Verifica se há membros na equipe alvo antes de realizar um ataque
         }
         for (Personagem atacante : equipeAtacante.getMembros()) {
-            Personagem alvo = sortearAlvo(equipeAlvo);
-            if (alvo != null) {
-                // Exibir lista de habilidades e realizar ataque
-                realizarAtaque(atacante, alvo);
+            // Verifica se o atacante está em tempo de espera
+            if (atacante.getTempoEspera() > 0) {
+                System.out.println(atacante.getNome() + " está em tempo de descanso. Não pode atacar neste turno.");
+                continue;
+            }
+
+            for (Personagem atacante1 : equipeAtacante.getMembros()) {
+                Personagem alvo = sortearAlvo(equipeAlvo);
+                if (alvo != null) {
+                    // Exibir lista de habilidades e realizar ataque
+                    realizarAtaque(atacante1, alvo);
+                }
             }
         }
     }
 
     private void realizarAtaque(Personagem atacante, Personagem alvo) {
+        if (atacante.getTempoEspera() > 0) {
+            System.out.println(atacante.getNome() + " está em tempo de descanso. Não pode atacar neste turno.");
+            return;
+        }
         System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + ":");
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
@@ -279,6 +286,7 @@ public class Jogo {
         if (atacante.getPM() >= habilidadeEscolhida.getCustoPM(atacante)) {
             atacante.setPM(atacante.getPM() - habilidadeEscolhida.getCustoPM(atacante));
             atacar(atacante, alvo, habilidadeEscolhida);
+            atacante.setTempoEspera(habilidadeEscolhida.getTempo());
         } else {
             System.out.println("PM insuficiente para usar essa habilidade. Escolha outra opção.\n");
         }
@@ -377,12 +385,14 @@ public class Jogo {
         equipeInimigos.atualizarTempoEspera();
     }
 
+
     private void distribuirPontosExperiencia() {
         int experienciaTotal = pegarPontosExperiencia();
         ArrayList<Personagem> heroisSobreviventes = equipeHerois.getMembros();
         equipeHerois.computarPontosExperiencia(experienciaTotal);
         for (Personagem heroi : heroisSobreviventes) {
             System.out.println(heroi.getNome()+ " ganhou " + experienciaTotal + " pontos de experiência!");
+            heroi.setTempoEspera(0);
         }
     }
 
