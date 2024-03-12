@@ -302,6 +302,9 @@ public class Jogo {
                     atacante.setPM(atacante.getPM() - habilidadeEscolhida.getCustoPM(atacante));
                     atacante.setTempoEspera(habilidadeEscolhida.getTempo());
                     int dano = habilidadeEscolhida.calcularDano(atacante);
+                    if (!habilidadeEscolhida.isAfetaTodos() && !equipeAtacante.equals(equipeInimigos)) {
+                    System.out.println("O ataque de " + atacante.getNome() + " causou " + dano + " de dano em " + alvo.getNome());
+                    }
                     if (habilidadeEscolhida.isAfetaAmigos() && equipeAtacante.equals(equipeHerois)) {
                         System.out.println("\nSelecione o aliado para curar:\n");
                         for (int i = 0; i < equipeAtacante.getMembros().size(); i++) {
