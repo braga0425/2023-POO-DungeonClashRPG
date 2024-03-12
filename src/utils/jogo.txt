@@ -1,8 +1,47 @@
 Ogro Monstro 1
 
-fase Um grupo de alunos caminhava tranquilamente pelo campus, quando se deparam com uma criatura estranha. Depois de um grito horrendo, ela para cima dos alunos. É hora de usar suas habilidades para derrotar a criatura!
+fase Um grupo de alunos caminhava tranquilamente pelo campus, quando se deparam com uma criatura estranha. Depois de um grito horrendo, ela parte para cima dos alunos. É hora de usar suas habilidades para derrotar a criatura!
 
 ZumbiGobbling Monstro 1
 ZumbiGuerreiro Guerreiro 2
 
 fase Após derrotar o Ogro, o grupo segue em direção ao RU. Lá se deparam com duas criaturas estranhas. É hora de usar suas habilidades para derrotar os zumbis!
+
+Esqueleto Arqueiro 2
+
+fase Enquanto exploram o campus à noite, o grupo é emboscado por um esqueleto arqueiro, que ataca com flechas afiadas. Os alunos precisam usar suas habilidades para desviar das flechas e derrotar o esqueleto.
+
+DragãoDeFogo Monstro 3
+
+fase Durante uma visita à biblioteca, um dragão de fogo emerge dos livros antigos e ameaça queimar tudo. O grupo deve encontrar uma maneira de apagar as chamas e derrotar o dragão antes que seja tarde demais.
+
+VampiroSanguinário Monstro 2
+VampiroSombrio Monstro 2
+
+fase No dormitório, os alunos são atacados por um vampiros sedentos por sangue. Eles precisam encontrar alho e estacas de madeira para repelir o vampiro e proteger a si mesmos.
+
+GólemDePedra Guerreiro 3
+
+fase No laboratório de ciências, um experimento fracassado cria um gólem de pedra descontrolado. O grupo deve encontrar uma maneira de desativar o gólem antes que ele destrua o prédio.
+
+SereiaEncantadora Guerreiro 3
+Merlin Mago 3
+
+fase Durante um passeio pelo lago do campus, os alunos são hipnotizados por uma sereia encantadora e selados pelo mago Merlin. Eles precisam se libertar, resistir ao canto sedutor da sereia e encontrar uma forma de quebrar o encanto.
+
+GrifoMajestoso Guerreiro 3
+GrifoFeroz Monstro 3
+Quimera Arqueiro 3
+
+fase Enquanto exploram os jardins do campus, o grupo é confrontado por grifos e um quimera que protege seu território. Todos devem demonstrar coragem e astúcia para persuadir eles ou enfrentar uma batalha épica.
+
+FantasmaAssombrado Monstro 4
+FeiticeiraFantasma Mago 4
+
+fase Na antiga capela abandonada, os alunos são assombrados por fantasmas inquietos. Eles devem resolver o mistério por trás da assombração e ajudar os fantasmas a encontrar paz.
+
+ReidasSombras Guerreiro 5
+DragãoDeOlhosAzuis Monstro 5
+MagoNegro Mago 5
+
+fase No ponto mais alto da universidade, o grupo enfrenta o Rei das Sombras e seus fiés capangas, entidades malignas que ameaçam consumir toda a luz. Utilizando todas as suas habilidades e aliados que encontraram ao longo da jornada, eles devem derrotar eles e salvar a universidade da escuridão eterna.
