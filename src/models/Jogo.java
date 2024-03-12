@@ -10,11 +10,8 @@ import java.util.Scanner;
 public class Jogo {
     private Equipe equipeHerois;
     private Equipe equipeInimigos;
-    String nomeClasse;
-
     private int faseAtual = 1;
     private int cont = 1;
-
     public Jogo() {
         equipeHerois = new Equipe();
         equipeInimigos = new Equipe();
@@ -29,7 +26,7 @@ public class Jogo {
             System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
             batalhar();
 
-            // Verificar o resultado da batalha
+            //verificar o resultado da batalha
             if (equipeInimigos.getMembros().isEmpty()) {
                 if (faseAtual < 1) {
                     faseAtual++;
@@ -44,7 +41,6 @@ public class Jogo {
             }
         }
     }
-
 
     private void carregarEquipesHerois() {
         Scanner scanner = new Scanner(System.in);
@@ -85,24 +81,24 @@ public class Jogo {
     private void carregarEquipesInimigos() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/utils/jogo.txt"))) {
             String linha;
-            boolean lerInimigos = true; // Começar a ler os inimigos
+            boolean lerInimigos = true; //começar a ler os inimigos
             while ((linha = br.readLine()) != null) {
                 if (linha.startsWith("fase")) {
                     System.out.println("\n" + linha.substring(5));
-                    iniciarBatalha(); // Iniciar a batalha se não estivermos lendo inimigos pela primeira vez
-                    lerInimigos = true; // Parar de ler os inimigos após encontrar a indicação de fase
+                    iniciarBatalha(); //iniciar a batalha se não estivermos lendo inimigos pela primeira vez
+                    lerInimigos = true; //parar de ler os inimigos após encontrar a indicação de fase
 
                     faseAtual++;
                     continue;
                 }
 
                 if (linha.isEmpty()) {
-                    // Pula linhas vazias
+                    //pula linhas vazias
                     continue;
                 }
 
                 if (lerInimigos) {
-                    // Processar a linha como um inimigo somente se estamos lendo inimigos
+                    //processar a linha como um inimigo somente se estamos lendo inimigos
                     String[] partes = linha.split(" ");
                     if (partes.length < 2) {
                         System.out.println("Linha inválida: \n" + linha);
@@ -111,7 +107,7 @@ public class Jogo {
 
                     String nome = partes[0];
                     String classe = partes[1];
-                    int nivel = Integer.parseInt(partes[2]); // Define o nível inicial como 1 para todos os inimigos
+                    int nivel = Integer.parseInt(partes[2]); //define o nível inicial como 1 para todos os inimigos
                     Classe classePersonagem;
                     switch (classe.toLowerCase()) {
                         case "guerreiro":
@@ -132,7 +128,7 @@ public class Jogo {
                     }
                     Personagem inimigo = new Personagem(nome, nivel, 0, 0, 0, classePersonagem);
 
-                    int PV =  inimigo.calcularPVMax();
+                    int PV = inimigo.calcularPVMax();
                     int PM = inimigo.calcularPMMax();
 
                     inimigo.setPV(PV);
@@ -141,7 +137,7 @@ public class Jogo {
                 }
             }
 
-            // Iniciar a última batalha após ler todos os inimigos
+            //iniciar a última batalha após ler todos os inimigos
             if (lerInimigos) {
                 iniciarBatalha();
             }
@@ -200,7 +196,7 @@ public class Jogo {
                 ataqueAleatorio(equipePrimeiroAtaque, equipeSegundoAtaque);
             }
 
-            // Segunda equipe ataca
+            //segunda equipe ataca
             if (!equipePrimeiroAtaque.getMembros().isEmpty() && !equipeSegundoAtaque.getMembros().isEmpty()) {
                 System.out.println("\nEquipe dos " + nomeEquipeSegundoAtaque + " ataca:");
                 ataqueAleatorio(equipeSegundoAtaque, equipePrimeiroAtaque);
@@ -210,15 +206,15 @@ public class Jogo {
             cont++;
         }
 
-        // Verificar o resultado da batalha
+        //verificar o resultado da batalha
         if (equipeInimigos.getMembros().isEmpty()) {
             if (faseConcluida()) {
                 faseAtual++;
                 cont = 1;
             } else {
-            System.out.println("\nOs heróis venceram a batalha!");
-            faseAtual++;
-            cont = 1;
+                System.out.println("\nOs heróis venceram a batalha!");
+                faseAtual++;
+                cont = 1;
             }
         } else {
             System.out.println("Os heróis foram derrotados!\n");
@@ -232,17 +228,16 @@ public class Jogo {
             int index = rand.nextInt(equipe.getMembros().size());
             return equipe.getMembros().get(index);
         } else {
-            //System.out.println("A equipe está vazia, não é possível sortear um alvo.");
             return null;
         }
     }
 
     private void ataqueAleatorio(Equipe equipeAtacante, Equipe equipeAlvo) {
         if (equipeAlvo.getMembros().isEmpty()) {
-            return; // Verifica se há membros na equipe alvo antes de realizar um ataque
+            return; //verifica se há membros na equipe alvo antes de realizar um ataque
         }
         for (Personagem atacante : equipeAtacante.getMembros()) {
-            // Verifica se o atacante está em tempo de espera
+            //verifica se o atacante está em tempo de espera
             if (atacante.getTempoEspera() > 0) {
                 System.out.println("\n" + atacante.getNome() + " está em tempo de descanso. Não pode atacar neste turno.");
                 continue;
@@ -251,7 +246,7 @@ public class Jogo {
             for (Personagem atacante1 : equipeAtacante.getMembros()) {
                 Personagem alvo = sortearAlvo(equipeAlvo);
                 if (alvo != null) {
-                    // Exibir lista de habilidades e realizar ataque
+                    //exibir lista de habilidades e realizar ataque
                     realizarAtaque(atacante1, alvo);
                 }
             }
@@ -262,7 +257,7 @@ public class Jogo {
         Equipe equipeAtacante;
         Equipe equipeAlvo;
 
-        // Determinar as equipes do atacante e do alvo
+        //determinar as equipes do atacante e do alvo
         if (equipeHerois.getMembros().contains(atacante)) {
             equipeAtacante = equipeHerois;
             equipeAlvo = equipeInimigos;
@@ -271,7 +266,7 @@ public class Jogo {
             equipeAlvo = equipeHerois;
         }
 
-        // Verificar se o atacante está em tempo de descanso
+        //verificar se o atacante está em tempo de descanso
         if (atacante.getTempoEspera() > 0) {
             System.out.println(atacante.getNome() + " está em tempo de descanso. Não pode atacar neste turno.");
             return;
@@ -281,16 +276,16 @@ public class Jogo {
         int escolhaHabilidade;
 
         while (true) {
-        System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + "!");
-        System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
-        for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
-            Habilidade habilidade = atacante.getClasse().getHabilidades().get(i);
-            System.out.println((i + 1) + " - " + habilidade.getNome() +
-                    " (PM: " + habilidade.getCustoPM(atacante) +
-                    ", Dano: " + habilidade.calcularDano(atacante) +
-                    ", Tempo de Espera: " + habilidade.getTempo() +
-                    ", Afeta: " + (habilidade.isAfetaTodos() ? "Todos" : "Um alvo") + ")");
-        }
+            System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + "!");
+            System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
+            for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
+                Habilidade habilidade = atacante.getClasse().getHabilidades().get(i);
+                System.out.println((i + 1) + " - " + habilidade.getNome() +
+                        " (PM: " + habilidade.getCustoPM(atacante) +
+                        ", Dano: " + habilidade.calcularDano(atacante) +
+                        ", Tempo de Espera: " + habilidade.getTempo() +
+                        ", Afeta: " + (habilidade.isAfetaTodos() ? "Todos" : "Um alvo") + ")");
+            }
 
             try {
                 escolhaHabilidade = Integer.parseInt(scanner.nextLine());
@@ -303,7 +298,7 @@ public class Jogo {
                     atacante.setTempoEspera(habilidadeEscolhida.getTempo());
                     int dano = habilidadeEscolhida.calcularDano(atacante);
                     if (!habilidadeEscolhida.isAfetaTodos() && !equipeAtacante.equals(equipeInimigos)) {
-                    System.out.println("O ataque de " + atacante.getNome() + " causou " + dano + " de dano em " + alvo.getNome());
+                        System.out.println("O ataque de " + atacante.getNome() + " causou " + dano + " de dano em " + alvo.getNome());
                     }
                     if (habilidadeEscolhida.isAfetaAmigos() && equipeAtacante.equals(equipeHerois)) {
                         System.out.println("\nSelecione o aliado para curar:\n");
@@ -331,16 +326,14 @@ public class Jogo {
                         } while (!habilidadeEscolhidaComSucesso);
 
 
-
-
-                        // Aplicar a cura ao aliado escolhido
+                        //aplicar a cura ao aliado escolhido
                         Personagem aliadoCura = equipeAtacante.getMembros().get(escolhaAliado - 1);
                         int cura = habilidadeEscolhida.curaAliado(atacante);
                         aliadoCura.setPV(aliadoCura.getPV() + cura);
-                        // Exibir mensagem de cura
+                        //exibir mensagem de cura
                         System.out.println("\n" + atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.\n");
                     } else if (habilidadeEscolhida.isAfetaTodos() && equipeAtacante.equals(equipeInimigos)) {
-                        // Aplicar a habilidade em todos os membros da equipe alvo
+                        //aplicar a habilidade em todos os membros da equipe alvo
                         for (Personagem todosAlvo : equipeAlvo.getMembros()) {
                             todosAlvo.setPV(todosAlvo.getPV() - dano);
                             System.out.println("\n" + todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!");
@@ -350,7 +343,7 @@ public class Jogo {
                             }
                         }
                     } else {
-                        // Aplicar o dano no alvo selecionado
+                        //aplicar o dano no alvo selecionado
                         alvo.setPV(alvo.getPV() - dano);
                         exibirInformacoesEquipes();
                         if (alvo.getPV() <= 0) {
@@ -374,12 +367,10 @@ public class Jogo {
         }
     }
 
-
     private void proximoTurno() {
         equipeHerois.atualizarTempoEspera();
         equipeInimigos.atualizarTempoEspera();
     }
-
 
     private void distribuirPontosExperiencia(boolean heroiDerrotouInimigo) {
         int experienciaTotal = pegarPontosExperiencia();
@@ -401,7 +392,7 @@ public class Jogo {
         }
     }
 
-    private int pegarPontosExperiencia(){
+    private int pegarPontosExperiencia() {
         int pontosExperiencia = 0;
         for (Personagem inimigoDerrotado : equipeInimigos.getMembros()) {
             pontosExperiencia = inimigoDerrotado.getNivel() * 5;
