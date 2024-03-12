@@ -71,7 +71,12 @@ public class Jogo {
                     System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro.");
                     classePersonagem = new Guerreiro();
             }
-            Personagem heroi = new Personagem(nome, 1, 0, 100, 100, classePersonagem);
+            Personagem heroi = new Personagem(nome, 1, 0, 0, 0, classePersonagem);
+
+            int PV = heroi.calcularPVMax();
+            int PM = heroi.calcularPMMax();
+
+            heroi = new Personagem(nome, 1, 0, PV, PM, classePersonagem);
             equipeHerois.adicionarPersonagem(heroi);
         }
 
@@ -107,8 +112,6 @@ public class Jogo {
                     String nome = partes[0];
                     String classe = partes[1];
                     int nivel = Integer.parseInt(partes[2]); // Define o nível inicial como 1 para todos os inimigos
-                    int PV = 100;
-                    int PM = 100;
                     Classe classePersonagem;
                     switch (classe.toLowerCase()) {
                         case "guerreiro":
@@ -127,7 +130,12 @@ public class Jogo {
                             System.out.println("Classe inválida. Será atribuída a classe padrão Guerreiro para o inimigo. \n" + nome);
                             classePersonagem = new Guerreiro();
                     }
-                    Personagem inimigo = new Personagem(nome, nivel, 0, PV, PM, classePersonagem);
+                    Personagem inimigo = new Personagem(nome, nivel, 0, 0, 0, classePersonagem);
+
+                    int PV =  inimigo.calcularPVMax();
+                    int PM = inimigo.calcularPMMax();
+
+                    inimigo = new Personagem(nome, nivel, 0, PV, PM, classePersonagem);
                     equipeInimigos.adicionarPersonagem(inimigo);
                 }
             }
