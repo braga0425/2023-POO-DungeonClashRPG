@@ -7,7 +7,7 @@ public class Guerreiro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        // Habilidade "Socar"
+        //habilidade "Socar"
         PesosDeAtributos pesosSocar = new PesosDeAtributos();
         pesosSocar.setPesoForca(0.3);
         pesosSocar.setPesoAgilidade(0.1);
@@ -18,7 +18,7 @@ public class Guerreiro extends Classe {
             }
         });
 
-        // Habilidade "Golpe de Espada"
+        //habilidade "Golpe de Espada"
         PesosDeAtributos pesosGolpeEspada = new PesosDeAtributos();
         pesosGolpeEspada.setPesoForca(0.7);
         pesosGolpeEspada.setPesoAgilidade(0.3);
@@ -29,7 +29,7 @@ public class Guerreiro extends Classe {
             }
         });
 
-        // Habilidade "Espada Flamejante"
+        //habilidade "Espada Flamejante"
         PesosDeAtributos pesosEspadaFlamejante = new PesosDeAtributos();
         pesosEspadaFlamejante.setPesoForca(0.3);
         pesosEspadaFlamejante.setPesoAgilidade(0.5);

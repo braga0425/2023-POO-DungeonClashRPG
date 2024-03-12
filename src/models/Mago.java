@@ -7,7 +7,7 @@ public class Mago extends Classe {
     }
 
     private void adicionarHabilidades() {
-        // Habilidade "Socar"
+        //habilidade "Socar"
         PesosDeAtributos pesosSocar = new PesosDeAtributos();
         pesosSocar.setPesoForca(0.1);
         pesosSocar.setPesoAgilidade(0.1);
@@ -18,7 +18,7 @@ public class Mago extends Classe {
             }
         });
 
-        // Habilidade "Enfraquecer"
+        //habilidade "Enfraquecer"
         PesosDeAtributos pesosEnfraquecer = new PesosDeAtributos();
         pesosEnfraquecer.setPesoForca(0.3);
         pesosEnfraquecer.setPesoAgilidade(0.2);
@@ -32,7 +32,7 @@ public class Mago extends Classe {
             }
         });
 
-        // Habilidade "Cura Amigo"
+        //habilidade "Cura Amigo"
         PesosDeAtributos pesosCuraAmigo = new PesosDeAtributos();
         pesosCuraAmigo.setPesoForca(0.5);
         pesosCuraAmigo.setPesoAgilidade(0.2);

@@ -6,7 +6,7 @@ public class PesosDeAtributos {
     private double pesoInteligencia;
 
     public PesosDeAtributos() {
-        // Construtor vazio
+        //construtor vazio
     }
 
     public double getPesoForca() {
