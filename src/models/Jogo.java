@@ -21,12 +21,11 @@ public class Jogo {
     }
 
     public void iniciarJogo() {
-        carregarEquipesHerois();
+       carregarEquipesHerois();
 
         while (!equipeHerois.getMembros().isEmpty()) {
             carregarEquipesInimigos();
             exibirInformacoesEquipes();
-            System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
             batalhar();
 
             // Verificar o resultado da batalha
@@ -38,8 +37,8 @@ public class Jogo {
                     System.out.println("Parabéns! Os heróis venceram todas as fases!\n");
                     break;
                 }
-            } else {
-                System.out.println("Os heróis foram derrotados na fase " + faseAtual + "!\n");
+            } else if (equipeHerois.getMembros().isEmpty()) {
+                System.out.println("Os heróis foram derrotados na fase " + (faseAtual - 1 )+ "!\n");
                 break;
             }
         }
@@ -87,13 +86,17 @@ public class Jogo {
             String linha;
             boolean lerInimigos = true; // Começar a ler os inimigos
             while ((linha = br.readLine()) != null) {
-                if (linha.startsWith("fase")) {
-                    System.out.println("\n" + linha.substring(5));
-                    iniciarBatalha(); // Iniciar a batalha se não estivermos lendo inimigos pela primeira vez
-                    lerInimigos = true; // Parar de ler os inimigos após encontrar a indicação de fase
+                if(!equipeHerois.getMembros().isEmpty()) {
+                    if (linha.startsWith("fase")) {
+                        System.out.println("\n" + linha.substring(5));
+                        iniciarBatalha(); // Iniciar a batalha se não estivermos lendo inimigos pela primeira vez
+                        lerInimigos = true; // Parar de ler os inimigos após encontrar a indicação de fase
 
-                    faseAtual++;
-                    continue;
+                        faseAtual++;
+                        continue;
+                    }
+                }else {
+                    break;
                 }
 
                 if (linha.isEmpty()) {
@@ -151,17 +154,20 @@ public class Jogo {
     }
 
     private void iniciarBatalha() {
-        exibirInformacoesEquipes();
-        System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
-        batalhar();
+        if(!equipeHerois.getMembros().isEmpty()){
+            exibirInformacoesEquipes();
+            System.out.println("\nComeça a batalha na fase " + faseAtual + "!");
+            batalhar();}
     }
 
     private void exibirInformacoesEquipes() {
-        System.out.println("\nEquipe dos Heróis:\n");
-        exibirInformacoesEquipe(equipeHerois);
-        System.out.println("\nEquipe dos Inimigos:\n");
-        exibirInformacoesEquipe(equipeInimigos);
-        pegarPontosExperiencia();
+        if(!equipeHerois.getMembros().isEmpty()){
+            System.out.println("\nEquipe dos Heróis:\n");
+            exibirInformacoesEquipe(equipeHerois);
+            System.out.println("\nEquipe dos Inimigos:\n");
+            exibirInformacoesEquipe(equipeInimigos);
+            pegarPontosExperiencia();
+        }
     }
 
     private void exibirInformacoesEquipe(Equipe equipe) {
@@ -208,20 +214,6 @@ public class Jogo {
 
             proximoTurno();
             cont++;
-        }
-
-        // Verificar o resultado da batalha
-        if (equipeInimigos.getMembros().isEmpty()) {
-            if (faseConcluida()) {
-                faseAtual++;
-                cont = 1;
-            } else {
-            System.out.println("Os heróis venceram a batalha!\n");
-            faseAtual++;
-            cont = 1;
-            }
-        } else {
-            System.out.println("Os heróis foram derrotados!\n");
         }
     }
 
