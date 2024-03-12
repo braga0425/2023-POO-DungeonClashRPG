@@ -196,13 +196,13 @@ public class Jogo {
             System.out.println("\nTurno " + cont + ":");
 
             if (!equipeSegundoAtaque.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos " + nomeEquipePrimeiroAtaque + " ataca:");
+                System.out.println("\nEquipe dos " + nomeEquipePrimeiroAtaque + " ataca:\n");
                 ataqueAleatorio(equipePrimeiroAtaque, equipeSegundoAtaque);
             }
 
             // Segunda equipe ataca
             if (!equipePrimeiroAtaque.getMembros().isEmpty() && !equipeSegundoAtaque.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos " + nomeEquipeSegundoAtaque + " ataca:");
+                System.out.println("\nEquipe dos " + nomeEquipeSegundoAtaque + " ataca:\n");
                 ataqueAleatorio(equipeSegundoAtaque, equipePrimeiroAtaque);
             }
 
@@ -216,7 +216,7 @@ public class Jogo {
                 faseAtual++;
                 cont = 1;
             } else {
-            System.out.println("Os heróis venceram a batalha!\n");
+            System.out.println("\nOs heróis venceram a batalha!");
             faseAtual++;
             cont = 1;
             }
@@ -281,7 +281,7 @@ public class Jogo {
         int escolhaHabilidade;
 
         while (true) {
-        System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + ":");
+        System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + "!");
         System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
         for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
             Habilidade habilidade = atacante.getClasse().getHabilidades().get(i);
@@ -335,12 +335,12 @@ public class Jogo {
                         int cura = habilidadeEscolhida.curaAliado(atacante);
                         aliadoCura.setPV(aliadoCura.getPV() + cura);
                         // Exibir mensagem de cura
-                        System.out.println(atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.\n");
+                        System.out.println("\n" + atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.\n");
                     } else if (habilidadeEscolhida.isAfetaTodos() && equipeAtacante.equals(equipeInimigos)) {
                         // Aplicar a habilidade em todos os membros da equipe alvo
                         for (Personagem todosAlvo : equipeAlvo.getMembros()) {
                             todosAlvo.setPV(todosAlvo.getPV() - dano);
-                            System.out.println(todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!\n");
+                            System.out.println("\n" + todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!");
                             if (todosAlvo.getPV() <= 0) {
                                 System.out.println("\n" + todosAlvo.getNome() + " foi derrotado!\n");
                                 equipeAlvo.removerPersonagem(todosAlvo);
