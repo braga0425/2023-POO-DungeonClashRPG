@@ -47,7 +47,7 @@ public class Personagem {
     }
 
     public void setPM(int PM){
-        this.PM = this.PM;
+        this.PM = PM;
     }
     public int getTempoEspera() {
         return tempoEspera;

@@ -46,7 +46,7 @@ public class Mago extends Classe {
             }
 
             @Override
-            public int getPontosMagia(Personagem personagem) {
+            public int getCustoPM(Personagem personagem) {
                 return (int) Math.ceil(personagem.getNivel() * (personagem.getClasse().getInteligencia() * custoCuraAmigo.getPesoInteligencia()));
             }
         });

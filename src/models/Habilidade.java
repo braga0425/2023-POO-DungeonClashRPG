@@ -80,7 +80,7 @@ public class Habilidade {
         return 0;
     }
 
-    public int getPontosMagia(Personagem personagem) {
+    public int getCustoPM(Personagem personagem) {
         return 0;
     }
 }

@@ -75,7 +75,7 @@ public class Jogo {
 
             int PV = heroi.calcularPVMax();
             int PM = heroi.calcularPMMax();
-
+            System.out.println("PM: "+ PM);
             heroi.setPV(PV);
             heroi.setPM(PM);
             equipeHerois.adicionarPersonagem(heroi);
@@ -136,7 +136,8 @@ public class Jogo {
                     int PV =  inimigo.calcularPVMax();
                     int PM = inimigo.calcularPMMax();
 
-                    inimigo = new Personagem(nome, nivel, 0, PV, PM, classePersonagem);
+                    inimigo.setPV(PV);
+                    inimigo.setPM(PM);
                     equipeInimigos.adicionarPersonagem(inimigo);
                 }
             }
@@ -170,22 +171,34 @@ public class Jogo {
         for (Personagem personagem : membros) {
             System.out.println("ID: " + personagem.getID() + " | Nome: " + personagem.getNome() + " | Classe: " +
                     personagem.getClasse().getNome() + " | PV: " + personagem.getPV() +
-                    " | PM: " + personagem.getPM() + " | Nível: " + personagem.getNivel());
+                    " | PM: " + personagem.getPM() + " | Nível: " + personagem.getNivel() + " | Tempo de espera: " + personagem.getTempoEspera());
         }
     }
 
     private void batalhar() {
+        Equipe equipePrimeiroAtaque;
+        Equipe equipeSegundoAtaque;
+        Random rand = new Random();
+        if (rand.nextBoolean()) {
+            equipePrimeiroAtaque = equipeHerois;
+            equipeSegundoAtaque = equipeInimigos;
+        } else {
+            equipePrimeiroAtaque = equipeInimigos;
+            equipeSegundoAtaque = equipeHerois;
+        }
+
         while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
             System.out.println("\nTurno " + cont + ":");
 
-            if (!equipeInimigos.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos Heróis ataca:");
-                ataqueAleatorio(equipeHerois, equipeInimigos);
+            if (!equipeSegundoAtaque.getMembros().isEmpty()) {
+                System.out.println("\nEquipe dos " + equipePrimeiroAtaque + " ataca:");
+                ataqueAleatorio(equipePrimeiroAtaque, equipeSegundoAtaque);
             }
 
-            if (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos Inimigos ataca:");
-                ataqueAleatorio(equipeInimigos, equipeHerois);
+            // Segunda equipe ataca
+            if (!equipePrimeiroAtaque.getMembros().isEmpty() && !equipeSegundoAtaque.getMembros().isEmpty()) {
+                System.out.println("\nEquipe dos " + equipeSegundoAtaque + " ataca:");
+                ataqueAleatorio(equipeSegundoAtaque, equipePrimeiroAtaque);
             }
 
             proximoTurno();
@@ -229,12 +242,49 @@ public class Jogo {
         }
         for (Personagem atacante : equipeAtacante.getMembros()) {
             Personagem alvo = sortearAlvo(equipeAlvo);
-            if (alvo != null)
-                atacar(atacante, alvo);
+            if (alvo != null) {
+                // Exibir lista de habilidades e realizar ataque
+                realizarAtaque(atacante, alvo);
+            }
         }
     }
 
-    private void atacar(Personagem atacante, Personagem alvo) {
+    private void realizarAtaque(Personagem atacante, Personagem alvo) {
+        System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + ":");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
+        for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
+            Habilidade habilidade = atacante.getClasse().getHabilidades().get(i);
+            System.out.println((i + 1) + " - " + habilidade.getNome() +
+                    " (PM: " + habilidade.getCustoPM(atacante) +
+                    ", Dano: " + habilidade.calcularDano(atacante) +
+                    ", Tempo de Espera: " + habilidade.getTempo() +
+                    ", Afeta: " + (habilidade.isAfetaTodos() ? "Todos" : "Um alvo") + ")");
+        }
+
+        int escolhaHabilidade = 0;
+        do {
+            try {
+                escolhaHabilidade = Integer.parseInt(scanner.nextLine());
+                if (escolhaHabilidade <= 0 || escolhaHabilidade > atacante.getClasse().getHabilidades().size()) {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Escolha inválida. Digite um número entre 1 e " + atacante.getClasse().getHabilidades().size() + ".\n");
+            }
+        } while (escolhaHabilidade <= 0 || escolhaHabilidade > atacante.getClasse().getHabilidades().size());
+
+        // Realizar o ataque com a habilidade escolhida
+        Habilidade habilidadeEscolhida = atacante.getClasse().getHabilidades().get(escolhaHabilidade - 1);
+        if (atacante.getPM() >= habilidadeEscolhida.getCustoPM(atacante)) {
+            atacante.setPM(atacante.getPM() - habilidadeEscolhida.getCustoPM(atacante));
+            atacar(atacante, alvo, habilidadeEscolhida);
+        } else {
+            System.out.println("PM insuficiente para usar essa habilidade. Escolha outra opção.\n");
+        }
+    }
+
+    private void atacar(Personagem atacante, Personagem alvo, Habilidade habilidade) {
         Equipe equipeAtacante;
         Equipe equipeAlvo;
 
@@ -255,11 +305,6 @@ public class Jogo {
         Random rand = new Random();
         int indexAlvo = rand.nextInt(membrosAlvo.size());
         Personagem alvoAleatorio = membrosAlvo.get(indexAlvo);
-
-        System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
-        for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
-            System.out.println((i + 1) + " - " + atacante.getClasse().getHabilidades().get(i).getNome());
-        }
 
 
         int escolhaHabilidade = 0;
