@@ -76,7 +76,8 @@ public class Jogo {
             int PV = heroi.calcularPVMax();
             int PM = heroi.calcularPMMax();
 
-            heroi = new Personagem(nome, 1, 0, PV, PM, classePersonagem);
+            heroi.setPV(PV);
+            heroi.setPM(PM);
             equipeHerois.adicionarPersonagem(heroi);
         }
 
