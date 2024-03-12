@@ -303,9 +303,30 @@ public class Jogo {
             atacante.setTempoEspera(habilidadeEscolhida.getTempo());
             int dano = habilidadeEscolhida.calcularDano(atacante);
             if (habilidadeEscolhida.isAfetaAmigos() && equipeAtacante.equals(equipeHerois)) {
+                System.out.println("\nSelecione o aliado para curar:\n");
+                for (int i = 0; i < equipeAtacante.getMembros().size(); i++) {
+                    Personagem aliado = equipeAtacante.getMembros().get(i);
+                    System.out.println((i + 1) + " - " + aliado.getNome() +
+                            " (PV: " + aliado.getPV() +
+                            ", PM: " + aliado.getPM() +
+                            ", Nível: " + aliado.getNivel() +
+                            ")");
+                }
+
+                int escolhaAliado = 0;
+                do {
+                    try {
+                        escolhaAliado = Integer.parseInt(scanner.nextLine());
+                        if (escolhaAliado <= 0 || escolhaAliado > equipeAtacante.getMembros().size()) {
+                            throw new NumberFormatException();
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Escolha inválida. Digite um número entre 1 e " + equipeAtacante.getMembros().size() + ".\n");
+                    }
+                } while (escolhaAliado <= 0 || escolhaAliado > equipeAtacante.getMembros().size());
+
                 // Aplicar a cura ao aliado escolhido
-                int escolhaAliado = Integer.parseInt(scanner.nextLine()) - 1;
-                Personagem aliadoCura = equipeAtacante.getMembros().get(escolhaAliado);
+                Personagem aliadoCura = equipeAtacante.getMembros().get(escolhaAliado - 1);
                 int cura = habilidadeEscolhida.curaAliado(atacante);
                 aliadoCura.setPV(aliadoCura.getPV() + cura);
                 // Exibir mensagem de cura
