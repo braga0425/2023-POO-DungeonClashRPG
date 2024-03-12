@@ -177,26 +177,32 @@ public class Jogo {
     private void batalhar() {
         Equipe equipePrimeiroAtaque;
         Equipe equipeSegundoAtaque;
+        String nomeEquipePrimeiroAtaque;
+        String nomeEquipeSegundoAtaque;
         Random rand = new Random();
         if (rand.nextBoolean()) {
             equipePrimeiroAtaque = equipeHerois;
             equipeSegundoAtaque = equipeInimigos;
+            nomeEquipePrimeiroAtaque = "Heróis";
+            nomeEquipeSegundoAtaque = "Inimigos";
         } else {
             equipePrimeiroAtaque = equipeInimigos;
             equipeSegundoAtaque = equipeHerois;
+            nomeEquipePrimeiroAtaque = "Inimigos";
+            nomeEquipeSegundoAtaque = "Heróis";
         }
 
         while (!equipeHerois.getMembros().isEmpty() && !equipeInimigos.getMembros().isEmpty()) {
             System.out.println("\nTurno " + cont + ":");
 
             if (!equipeSegundoAtaque.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos " + equipePrimeiroAtaque + " ataca:");
+                System.out.println("\nEquipe dos " + nomeEquipePrimeiroAtaque + " ataca:");
                 ataqueAleatorio(equipePrimeiroAtaque, equipeSegundoAtaque);
             }
 
             // Segunda equipe ataca
             if (!equipePrimeiroAtaque.getMembros().isEmpty() && !equipeSegundoAtaque.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos " + equipeSegundoAtaque + " ataca:");
+                System.out.println("\nEquipe dos " + nomeEquipeSegundoAtaque + " ataca:");
                 ataqueAleatorio(equipeSegundoAtaque, equipePrimeiroAtaque);
             }
 
