@@ -196,13 +196,13 @@ public class Jogo {
             System.out.println("\nTurno " + cont + ":");
 
             if (!equipeSegundoAtaque.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos " + nomeEquipePrimeiroAtaque + " ataca:\n");
+                System.out.println("\nEquipe dos " + nomeEquipePrimeiroAtaque + " ataca:");
                 ataqueAleatorio(equipePrimeiroAtaque, equipeSegundoAtaque);
             }
 
             // Segunda equipe ataca
             if (!equipePrimeiroAtaque.getMembros().isEmpty() && !equipeSegundoAtaque.getMembros().isEmpty()) {
-                System.out.println("\nEquipe dos " + nomeEquipeSegundoAtaque + " ataca:\n");
+                System.out.println("\nEquipe dos " + nomeEquipeSegundoAtaque + " ataca:");
                 ataqueAleatorio(equipeSegundoAtaque, equipePrimeiroAtaque);
             }
 
@@ -244,7 +244,7 @@ public class Jogo {
         for (Personagem atacante : equipeAtacante.getMembros()) {
             // Verifica se o atacante está em tempo de espera
             if (atacante.getTempoEspera() > 0) {
-                System.out.println(atacante.getNome() + " está em tempo de descanso. Não pode atacar neste turno.");
+                System.out.println("\n" + atacante.getNome() + " está em tempo de descanso. Não pode atacar neste turno.");
                 continue;
             }
 
@@ -365,7 +365,7 @@ public class Jogo {
                     }
                     break;
                 } else {
-                    System.out.println("PM insuficiente para usar essa habilidade. Escolha outra opção.\n");
+                    System.out.println("PM insuficiente para usar essa habilidade. Escolha outra opção.");
                 }
 
             } catch (NumberFormatException e) {
