@@ -7,7 +7,7 @@ public class Monstro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        // Habilidade "Socar"
+        //habilidade "Socar"
         PesosDeAtributos pesosSocar = new PesosDeAtributos();
         pesosSocar.setPesoForca(0.8);
         pesosSocar.setPesoAgilidade(0.4);
@@ -18,7 +18,7 @@ public class Monstro extends Classe {
             }
         });
 
-        // Habilidade "Chutar"
+        //habilidade "Chutar"
         PesosDeAtributos pesosChutar = new PesosDeAtributos();
         pesosChutar.setPesoForca(1.0);
         pesosChutar.setPesoAgilidade(0.5);
@@ -29,7 +29,7 @@ public class Monstro extends Classe {
             }
         });
 
-        // Habilidade "Grito Atordoante"
+        //habilidade "Grito Atordoante"
         PesosDeAtributos pesosGritoAtordoante = new PesosDeAtributos();
         pesosGritoAtordoante.setPesoForca(0.4);
         pesosGritoAtordoante.setPesoAgilidade(0.2);

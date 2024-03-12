@@ -7,7 +7,7 @@ public class Arqueiro extends Classe {
     }
 
     private void adicionarHabilidades() {
-        // Habilidade "Socar"
+        //habilidade "Socar"
         PesosDeAtributos pesosSocar = new PesosDeAtributos();
         pesosSocar.setPesoForca(0.5);
         pesosSocar.setPesoAgilidade(0.1);
@@ -19,7 +19,7 @@ public class Arqueiro extends Classe {
             }
         });
 
-        // Habilidade "Atirar Flecha"
+        //habilidade "Atirar Flecha"
         PesosDeAtributos pesosAtirarFlecha = new PesosDeAtributos();
         pesosAtirarFlecha.setPesoForca(0.3);
         pesosAtirarFlecha.setPesoAgilidade(0.5);
@@ -30,7 +30,7 @@ public class Arqueiro extends Classe {
             }
         });
 
-        // Habilidade "Flecha Encantada"
+        //habilidade "Flecha Encantada"
         PesosDeAtributos pesosFlechaEncantada = new PesosDeAtributos();
         pesosFlechaEncantada.setPesoForca(0.3);
         pesosFlechaEncantada.setPesoAgilidade(0.5);
