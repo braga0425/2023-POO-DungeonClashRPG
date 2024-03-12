@@ -271,9 +271,11 @@ public class Jogo {
             return;
         }
 
-        // Exibir opções de habilidades para o atacante
-        System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + ":");
         Scanner scanner = new Scanner(System.in);
+        int escolhaHabilidade;
+
+        while (true) {
+        System.out.println("\n" + atacante.getNome() + " está atacando " + alvo.getNome() + ":");
         System.out.println("\nSelecione a habilidade para " + atacante.getNome() + ":\n");
         for (int i = 0; i < atacante.getClasse().getHabilidades().size(); i++) {
             Habilidade habilidade = atacante.getClasse().getHabilidades().get(i);
@@ -284,82 +286,83 @@ public class Jogo {
                     ", Afeta: " + (habilidade.isAfetaTodos() ? "Todos" : "Um alvo") + ")");
         }
 
-        int escolhaHabilidade = 0;
-        do {
             try {
                 escolhaHabilidade = Integer.parseInt(scanner.nextLine());
                 if (escolhaHabilidade <= 0 || escolhaHabilidade > atacante.getClasse().getHabilidades().size()) {
                     throw new NumberFormatException();
                 }
+                Habilidade habilidadeEscolhida = atacante.getClasse().getHabilidades().get(escolhaHabilidade - 1);
+                if (atacante.getPM() >= habilidadeEscolhida.getCustoPM(atacante)) {
+                    atacante.setPM(atacante.getPM() - habilidadeEscolhida.getCustoPM(atacante));
+                    atacante.setTempoEspera(habilidadeEscolhida.getTempo());
+                    int dano = habilidadeEscolhida.calcularDano(atacante);
+                    if (habilidadeEscolhida.isAfetaAmigos() && equipeAtacante.equals(equipeHerois)) {
+                        System.out.println("\nSelecione o aliado para curar:\n");
+                        for (int i = 0; i < equipeAtacante.getMembros().size(); i++) {
+                            Personagem aliado = equipeAtacante.getMembros().get(i);
+                            System.out.println((i + 1) + " - " + aliado.getNome() +
+                                    " (PV: " + aliado.getPV() +
+                                    ", PM: " + aliado.getPM() +
+                                    ", Nível: " + aliado.getNivel() +
+                                    ")");
+                        }
+
+                        int escolhaAliado = 0;
+                        boolean habilidadeEscolhidaComSucesso = false;
+                        do {
+                            try {
+                                escolhaAliado = Integer.parseInt(scanner.nextLine());
+                                if (escolhaAliado <= 0 || escolhaAliado > equipeAtacante.getMembros().size()) {
+                                    throw new NumberFormatException();
+                                }
+                                habilidadeEscolhidaComSucesso = true;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Escolha inválida. Digite um número entre 1 e " + equipeAtacante.getMembros().size() + ".\n");
+                            }
+                        } while (!habilidadeEscolhidaComSucesso);
+
+
+
+
+                        // Aplicar a cura ao aliado escolhido
+                        Personagem aliadoCura = equipeAtacante.getMembros().get(escolhaAliado - 1);
+                        int cura = habilidadeEscolhida.curaAliado(atacante);
+                        aliadoCura.setPV(aliadoCura.getPV() + cura);
+                        // Exibir mensagem de cura
+                        System.out.println(atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.\n");
+                    } else if (habilidadeEscolhida.isAfetaTodos() && equipeAtacante.equals(equipeInimigos)) {
+                        // Aplicar a habilidade em todos os membros da equipe alvo
+                        for (Personagem todosAlvo : equipeAlvo.getMembros()) {
+                            todosAlvo.setPV(todosAlvo.getPV() - dano);
+                            System.out.println(todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!\n");
+                            if (todosAlvo.getPV() <= 0) {
+                                System.out.println("\n" + todosAlvo.getNome() + " foi derrotado!\n");
+                                equipeAlvo.removerPersonagem(todosAlvo);
+                            }
+                        }
+                    } else {
+                        // Aplicar o dano no alvo selecionado
+                        alvo.setPV(alvo.getPV() - dano);
+                        exibirInformacoesEquipes();
+                        if (alvo.getPV() <= 0) {
+                            System.out.println("\n" + alvo.getNome() + " foi derrotado!\n");
+                            if (equipeAtacante.equals(equipeHerois)) {
+                                distribuirPontosExperiencia(true); // Herói derrotou inimigo
+                            } else {
+                                distribuirPontosExperiencia(false); // Inimigo derrotou herói
+                            }
+                            equipeAlvo.removerPersonagem(alvo);
+                        }
+                    }
+                    break;
+                } else {
+                    System.out.println("PM insuficiente para usar essa habilidade. Escolha outra opção.\n");
+                }
+
             } catch (NumberFormatException e) {
                 System.out.println("Escolha inválida. Digite um número entre 1 e " + atacante.getClasse().getHabilidades().size() + ".\n");
             }
-        } while (escolhaHabilidade <= 0 || escolhaHabilidade > atacante.getClasse().getHabilidades().size());
-
-        // Realizar o ataque com a habilidade escolhida
-        Habilidade habilidadeEscolhida = atacante.getClasse().getHabilidades().get(escolhaHabilidade - 1);
-        if (atacante.getPM() >= habilidadeEscolhida.getCustoPM(atacante)) {
-            atacante.setPM(atacante.getPM() - habilidadeEscolhida.getCustoPM(atacante));
-            atacante.setTempoEspera(habilidadeEscolhida.getTempo());
-            int dano = habilidadeEscolhida.calcularDano(atacante);
-            if (habilidadeEscolhida.isAfetaAmigos() && equipeAtacante.equals(equipeHerois)) {
-                System.out.println("\nSelecione o aliado para curar:\n");
-                for (int i = 0; i < equipeAtacante.getMembros().size(); i++) {
-                    Personagem aliado = equipeAtacante.getMembros().get(i);
-                    System.out.println((i + 1) + " - " + aliado.getNome() +
-                            " (PV: " + aliado.getPV() +
-                            ", PM: " + aliado.getPM() +
-                            ", Nível: " + aliado.getNivel() +
-                            ")");
-                }
-
-                int escolhaAliado = 0;
-                do {
-                    try {
-                        escolhaAliado = Integer.parseInt(scanner.nextLine());
-                        if (escolhaAliado <= 0 || escolhaAliado > equipeAtacante.getMembros().size()) {
-                            throw new NumberFormatException();
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Escolha inválida. Digite um número entre 1 e " + equipeAtacante.getMembros().size() + ".\n");
-                    }
-                } while (escolhaAliado <= 0 || escolhaAliado > equipeAtacante.getMembros().size());
-
-                // Aplicar a cura ao aliado escolhido
-                Personagem aliadoCura = equipeAtacante.getMembros().get(escolhaAliado - 1);
-                int cura = habilidadeEscolhida.curaAliado(atacante);
-                aliadoCura.setPV(aliadoCura.getPV() + cura);
-                // Exibir mensagem de cura
-                System.out.println(atacante.getNome() + " curou " + aliadoCura.getNome() + " em " + cura + " pontos de vida.\n");
-            } else if (habilidadeEscolhida.isAfetaTodos() && equipeAtacante.equals(equipeInimigos)) {
-                // Aplicar a habilidade em todos os membros da equipe alvo
-                for (Personagem todosAlvo : equipeAlvo.getMembros()) {
-                    todosAlvo.setPV(todosAlvo.getPV() - dano);
-                    System.out.println(todosAlvo.getNome() + " sofreu " + dano + " pontos de dano!\n");
-                    if (todosAlvo.getPV() <= 0) {
-                        System.out.println("\n" + todosAlvo.getNome() + " foi derrotado!\n");
-                        equipeAlvo.removerPersonagem(todosAlvo);
-                    }
-                }
-            } else {
-                // Aplicar o dano no alvo selecionado
-                alvo.setPV(alvo.getPV() - dano);
-                exibirInformacoesEquipes();
-                if (alvo.getPV() <= 0) {
-                    System.out.println("\n" + alvo.getNome() + " foi derrotado!\n");
-                    if (equipeAtacante.equals(equipeHerois)) {
-                        distribuirPontosExperiencia(true); // Herói derrotou inimigo
-                    } else {
-                        distribuirPontosExperiencia(false); // Inimigo derrotou herói
-                    }
-                    equipeAlvo.removerPersonagem(alvo);
-                }
-            }
-        } else {
-            System.out.println("PM insuficiente para usar essa habilidade. Escolha outra opção.\n");
-            return; // Encerrar a execução, pois não há PM suficiente para usar a habilidade escolhida
         }
-
     }
 
 
