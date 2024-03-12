@@ -2,7 +2,7 @@ package models;
 
 public class Mago extends Classe {
     public Mago() {
-        super(14, 10, 12);
+        super(7, 5, 6);
         adicionarHabilidades();
     }
 

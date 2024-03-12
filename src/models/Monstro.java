@@ -2,7 +2,7 @@ package models;
 
 public class Monstro extends Classe {
     public Monstro() {
-        super(18, 8, 6);
+        super(9, 4, 3);
         adicionarHabilidades();
     }
 

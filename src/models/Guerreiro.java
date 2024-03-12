@@ -2,7 +2,7 @@ package models;
 
 public class Guerreiro extends Classe {
     public Guerreiro() {
-        super(14, 10, 12);
+        super(7, 5, 6);
         adicionarHabilidades();
     }
 
