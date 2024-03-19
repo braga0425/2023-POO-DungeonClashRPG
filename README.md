@@ -116,7 +116,7 @@ Jogos RPG são bastante populares, especialmente depois do surgimento do Dungeon
 
 A dinâmica do jogo é simples e consiste de uma série etapas, sendo que em cada uma delas batalhas irão acontecer. Neste confronto, os personagens são caracterizados por diferentes classes que determinam suas habilidades, progressão de níveis e uso de itens. Cada personagem é identificado pelo seu nome, classe e nível, além de possuir três atributos principais: força física (capacidade de ataque e resistência), agilidade (velocidade de ataque e esquiva) e inteligência (uso e resistência a magias), os quais variam de acordo com a classe. Eles terão também pontos de vida (PV), pontos de magia (PM) e pontos de experiência (PE). Conforme o quadro abaixo, as classes disponíveis inicialmente são arqueiro, guerreiro, mago e monstro, cada uma com suas próprias habilidades, atributos iniciais e evolução detalhados em tabelas específicas. Novas classes podem ser introduzidas no futuro, e os atributos de cada classe podem ser ajustados para equilibrar as batalhas.
 
-## Classes dos personagens
+## Classes dos Personagens
 
 | Arqueiro | Guerreiro | Mago | Monstro |
 |---|---|---|---|
@@ -155,7 +155,7 @@ A dinâmica do jogo é simples e consiste de uma série etapas, sendo que em cad
 |Kick|nível&ast;*Math.ceil*(agilidade&ast;0.5+força&ast;1.0)|8|Único|0|
 |Stunning Shout|nível&ast;*Math.ceil*(agilidade&ast;0.2+força&ast;0.4)|6|Todos|0|
 
-## Pontos de vida, Magia e Experiência
+## Pontos de Vida, Magia e Experiência
 
 Os pontos de vida (PV) de um personagem definem sua resistência a golpes. Os pontos de magia permitem ao personagem usar magias utilizando estes pontos. Abaixo, a definição de PV e PM máximos:
 
